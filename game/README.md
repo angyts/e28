@@ -16,3 +16,19 @@ Reference of [something similar](https://www.webgamesonline.com/mastermind/).
 - There are a total of 12 tries or less if code is broken.
 - Traditionally the score is given to the codemaker for every tries the codebreaker makes. But in my game, I will just record the total number of tries made.
  
+ ## Pseudocode
+ 
+ Backend js:
+ A digit is assigned to each colour.
+ A javascript array is used to store the answer key and the try, like `answer = [1,2,3,4]`.
+ First run to check and equate if correct location and correct colour: iterate `answer[i] === try[i]`, if correct to increment `blackmarker` and to remove item from array with  `answer.splice(i,1) and try.splice(i,1)`.
+ On second run to `answer.forEach(checkpositionfunction)`.
+ ```
+function checkpositionfunction(item, index) {
+    if (try.includes(item)){
+    increment global variable whitemarker      
+    }
+}
+```
+
+Frontend: `Check answer button`, `tries/pin buttons that change colour on click and change the data component to match with color/number`, `little box of square to show black and white pins`, `restart button`.
