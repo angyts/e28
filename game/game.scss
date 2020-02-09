@@ -1,0 +1,109 @@
+/* Colors  g,r,y,b,o,p*/
+$g: rgb(20, 128, 41);
+$r: rgb(247, 16, 27);
+$y: rgb(244, 255, 0);
+$b: rgb(0, 25, 226);
+$o: rgb(255, 89, 3);
+$p: rgb(255, 0, 233);
+
+/* Fonts */
+
+* {
+  font-family: Georgia, Times, serif;
+}
+
+/* test only */
+
+.g {
+  background-color: $g;
+}
+
+.r {
+  background-color: $r;
+}
+
+.y {
+  background-color: $y;
+}
+
+.b {
+  background-color: $b;
+}
+
+.o {
+  background-color: $o;
+}
+
+.p {
+  background-color: $p;
+}
+
+/* Buttons  I copied from https://codepen.io/jnbruno/pen/vNpPpW*/
+
+.btn:hover {
+  transform: scale(1.1, 1.1);
+}
+
+.btn-circle-large {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  border-radius: 35px;
+  font-size: 24px;
+  line-height: 1.33;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  padding: 6px 0px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
+}
+
+
+/* Cards for instructional design blocks */
+.card {
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  border-left: 10px solid;
+  background-color: #f2f2f2;
+  border-left-color: #5588FB;
+
+  &-read {
+    border-left-color: #ADD3DC;
+  }
+
+  &-share {
+    border-left-color: #DB504A;
+  }
+
+  &-watch {
+    border-left-color: #274060;
+  }
+
+  &-listen {
+    border-left-color: #7371FC;
+  }
+
+  &-explore {
+    border-left-color: #F9B5AC;
+  }
+
+  &-activity {
+    border-left-color: #DB504A;
+  }
+}
+
+/* TODO */
+
+.gameboard {
+  width: 50%;
+}
+
+coderow {
+
+}

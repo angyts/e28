@@ -17,6 +17,7 @@ Reference of [something similar](https://www.webgamesonline.com/mastermind/).
 - Traditionally the score is given to the codemaker for every tries the codebreaker makes. But in my game, I will just record the total number of tries made.
  
  ## Pseudocode
+ I'm going to call the colors by the first letter: g,r,y,b,o,p
  
  Backend js:
  A digit is assigned to each colour.
@@ -27,6 +28,7 @@ Reference of [something similar](https://www.webgamesonline.com/mastermind/).
 function checkpositionfunction(item, index) {
     if (try.includes(item)){
     increment global variable whitemarker      
+    also need to remove item from the try to account for duplicates
     }
 }
 ```
