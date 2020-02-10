@@ -106,7 +106,8 @@ function checkAnswer() {
             if (answer.includes(`${copyFinalAnswer[i]}`)) {
                 whiteMarker += 1;
                 // Remove to prevent duplicates
-                answer.splice(i, 1);
+                // https://stackoverflow.com/questions/9792927/javascript-array-search-and-remove-string
+                answer = answer.filter(e => e !== `${copyFinalAnswer[i]}`);
                 copyFinalAnswer.splice(i, 1);
                 // https://stackoverflow.com/questions/56827326/weird-bug-in-javascript-splice-method/56827364
                 i--;
