@@ -16,7 +16,12 @@ Reference of [something similar](https://www.webgamesonline.com/mastermind/).
 - There are a total of 12 tries or less if code is broken.
 - Traditionally the score is given to the codemaker for every tries the codebreaker makes. But in my game, I will just record the total number of tries made.
  
- ## Pseudocode
+ ## Known issues / Bugs
+ - The height of the gameboard extends below the page. But if I shrink the elements, it looks ugly...
+ - The black dots are not placed when game ends, because the code ends before that.
+ - The last row of black dots does not show up.
+ 
+ ## Pseudocode / Working files
  I'm going to call the colors by the first letter: g,r,y,b,o,p
  
  Backend js:
