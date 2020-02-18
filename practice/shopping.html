@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <h1>
+            Shopping List
+        </h1>
+        <form @submit='addItem' @submit.prevent><label>Item: <input type="text" v-model="item"></label>
+            <button>Add</button>
+        </form>
+        <p>Item Count: {{ item_count }}</p>
+        <ul>
+            <li v-for="item in list">
+                {{ item }}
+            </li>
+        </ul>
+    </div>
+</body>
+<style>
+    [v-cloak] {
+        display: none
+    }
+</style>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            item: '',
+            list: []
+        },
+        computed: {
+            item_count: function () {
+                return this.list.length;
+            }
+        },
+        methods: {
+            addItem: function () {
+                if (this.item !== '') {
+                    this.list.push(this.item);
+                    this.item = '';
+                }
+            }
+        }
+    })
+</script>
+</html>
