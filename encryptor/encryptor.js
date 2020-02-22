@@ -64,13 +64,30 @@ async function foo(msg) {
         message: openpgp.message.fromText(`${msg}`),                 // input as Message object
         publicKeys: (await openpgp.key.readArmored(publicKeyArmored)).keys // for encryption
     });
-    console.log(encrypted); // '-----BEGIN PGP MESSAGE ... END PGP MESSAGE-----'
+    // console.log(encrypted); // '-----BEGIN PGP MESSAGE ... END PGP MESSAGE-----'
+    app.encrypted_message = encrypted;
+    copyToClipboard(encrypted);
+}
+
+// https://stackoverflow.com/questions/33855641/copy-output-of-a-javascript-variable-to-the-clipboard
+function copyToClipboard(text) {
+    var dummy = document.createElement("textarea");
+    // to avoid breaking orgain page when copying more words
+    // cant copy when adding below this code
+    // dummy.style.display = 'none'
+    document.body.appendChild(dummy);
+    //Be careful if you use texarea. setAttribute('value', value), which works with "input" does not work with "textarea". – Eduard
+    dummy.value = text;
+    dummy.select();
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
 }
 
 var app = new Vue({
     el: '#app',
     data: {
-        message: ''
+        message: '',
+        encrypted_message: ''
     },
     computed: {},
     methods: {
@@ -78,4 +95,4 @@ var app = new Vue({
             foo(this.message);
         }
     }
-})
+});
