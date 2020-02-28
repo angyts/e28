@@ -10,15 +10,30 @@
         <h1>
             Shopping List
         </h1>
-        <form @submit='addItem' @submit.prevent><label>Item: <input type="text" v-model="item"></label>
+        <form @submit='addItem' @submit.prevent>
+            <label>Qty:
+                <input type="number" v-model.number="qty" style="width:5%">
+            </label>
+            <label>Item:
+                <input type="text" v-model="item">
+            </label>
             <button>Add</button>
         </form>
-        <p>Item Count: {{ item_count }}</p>
+        <p>Item Count: {{ total }}</p>
         <ul>
             <li v-for="item in list">
-                {{ item }}
+                {{ item.qty }} x {{ item.item }}
             </li>
         </ul>
+        <div v-if='true'>A</div>
+
+        <div v-if='false'>B</div>
+
+        <div v-show='true'>C</div>
+
+        <div v-show='false'>D</div>
+
+
     </div>
 </body>
 <style>
@@ -30,19 +45,26 @@
     var app = new Vue({
         el: '#app',
         data: {
+            qty: null,
+            total: null,
             item: '',
             list: []
         },
-        computed: {
-            item_count: function () {
-                return this.list.length;
-            }
-        },
+        computed: {},
         methods: {
             addItem: function () {
                 if (this.item !== '') {
-                    this.list.push(this.item);
+                    let itemWithQty = {qty: this.qty, item: this.item};
+                    this.list.push(itemWithQty);
+
+                    // reset
                     this.item = '';
+                    this.qty = null;
+
+                    // add totals
+                    let total = 0;
+                    this.list.forEach(item => total = total + (item['qty']));
+                    this.total = total;
                 }
             }
         }
