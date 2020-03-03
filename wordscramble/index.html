@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Word Scramble</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        [v-cloak] {
+            display: none
+        }
+
+        p, div {
+            width: fit-content;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="game.js" defer></script>
+</head>
+<body>
+    <div id="app" v-cloak class="p-3">
+        <h1>Word Scramble</h1>
+        <form v-show="!startGame" @submit='start' @submit.prevent>
+            <label>Enter Your Player Name: <input type="text" v-model="name"></label>
+            <button>Let's Play</button>
+        </form>
+        <div v-show="startGame">
+            <p>Game on {{ name }}</p>
+            <p>Your mystery word is:<big><big>{{ mysteryWord }}</big></big></p>
+            <p>Hint: <i>{{ chosenword[1] }}</i></p>
+
+            <form @submit='check' @submit.prevent>
+                <label>Your guess: <input type="text" v-model="guess"></label>
+                <button>submit guess</button>
+            </form>
+
+            <p v-if="correct == 2" :class="{ 'bg-danger': correct==2 , 'bg-success': correct==1 }"
+               class="text-white font-weight-bold">
+                Sorry, that's not correct. Please try again.</p>
+            <div v-else-if="correct == 1" :class="{ 'bg-danger': correct==2 , 'bg-success': correct==1 }"
+                 class="text-white font-weight-bold">
+                <form @submit='playagain' @submit.prevent>
+                    You got it! Nice work.
+                    <button>play again</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
