@@ -75,3 +75,5 @@ Example:
 https://github.com/susanBuck/e28/tree/master/word-scramble (Links to an external site.)
 http://e28word-scramble.yourdomain.com (Links to an external site.)
 Create a post in the forum if you face challenges/questions when completing this exercise.
+
+Building on your Word Scramble exercise from last week, transform your code so that the feedback on the page is built using a component.

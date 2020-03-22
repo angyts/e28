@@ -9,20 +9,106 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="game.js" defer></script>
 </head>
+
+<!-- TEMPLATE FOR OUR COMPONENTS -->
+<script type='text/x-template' id='game-pin'>
+    <div class="col-3">
+        <button type="button" class="btn btn-circle-large active-btn" @click="rotatePin"
+                :class="button[activeColourCounter].class"
+                :data-color="button[activeColourCounter].class">{{ button[activeColourCounter].name }}
+        </button>
+    </div>
+</script>
+
+<script type='text/x-template' id='checkanswer-pin'>
+    <div class="col-6">
+        <button type="button" class="btn btn-circle black"></button>
+    </div>
+</script>
+
+<script type='text/x-template' id='game-row'>
+    <div class="row gamerow row1 p-1">
+        <div class="col-8">
+            <div class="row">
+                <game-pin></game-pin>
+                <game-pin></game-pin>
+                <game-pin></game-pin>
+                <game-pin></game-pin>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="row">
+                <checkanswer-pin></checkanswer-pin>
+                <checkanswer-pin></checkanswer-pin>
+            </div>
+            <div class="row">
+                <checkanswer-pin></checkanswer-pin>
+                <checkanswer-pin></checkanswer-pin>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type='text/x-template' id='ans-row'>
+    <div class="row ansrow row1 p-1">
+        <div class="col-8">
+            <div class="row">
+                <div class="col-3" v-for='answer in answers'>
+                    <button type="button" class="btn btn-circle-large active-btn"
+                            :class="answer.class"
+                            :data-color="answer.class">{{ answer.name }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+        </div>
+    </div>
+</script>
+
 <body>
-    <div id="app" v-cloak>
-        <h1>
-            Shopping List
-        </h1>
-        <form @submit='addItem' @submit.prevent><label>Item: <input type="text" v-model="item"></label>
-            <button>Add</button>
-        </form>
-        <p>Item Count: {{ item_count }}</p>
-        <ul>
-            <li v-for="item in list">
-                {{ item }}
-            </li>
-        </ul>
+    <div id="app" class="main container p-1" v-cloak>
+
+        <div class="row justify-content-center">
+            <h2>Mastermind - One Player Edition</h2>
+        </div>
+        <div class="row justify-content-center p-2">
+            <div class="container-fluid col-2">
+                Hi, I need some help, Here are the game instructions
+            </div>
+            <div class="container col-8 gameboard border border-primary">
+                <ans-row :answers="finalAnswer"></ans-row>
+                <!-- TODO There is a way to dynamically insert components https://css-tricks.com/creating-vue-js-component-instances-programmatically/ -->
+                <game-row></game-row>
+                <game-row></game-row>
+                <game-row></game-row>
+                <game-row></game-row>
+                <game-row></game-row>
+                <game-row></game-row>
+                <game-row></game-row>
+                <game-row></game-row>
+                <game-row></game-row>
+                <game-row></game-row>
+                <game-row></game-row>
+                <game-row></game-row>
+
+                <div class="container footer">
+                    <div class="row">
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-info" onclick="">Check Answer</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="reset" class="btn btn-info" onclick="">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid col-2">
+                This is a running score board, as well as a chance to reset all your scores
+            </div>
+        </div>
     </div>
 </body>
 </html>
