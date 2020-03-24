@@ -1,5 +1,3 @@
-*Any instructions/notes in italics should be removed from the template before submitting* 
-
 # Project 1
 + By: Paul Ang Teng Soon
 + Production URL: <https://p1.paulang.rocks/>
