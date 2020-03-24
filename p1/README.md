@@ -1,17 +1,21 @@
 *Any instructions/notes in italics should be removed from the template before submitting* 
 
 # Project 1
-+ By: *your first and last name*
-+ Production URL: <http://e28p1.yourdomain.com>
++ By: Paul Ang Teng Soon
++ Production URL: <https://p1.paulang.rocks/>
 
 ## Outside resources
-*your list of outside resources go here*
+I have used the Vue documentation as well as google and the class forum.
 
-## Notes for instructor
-*any notes for me to refer to while grading; if none, omit this section*
+[Accessing Child components using a `$ref`](https://vuejs.org/v2/guide/components-edge-cases.html#Accessing-Child-Component-Instances-amp-Child-Elements)
 
-Requirements
-Keep track of a) a running score and b) results of each round of the game played.
-Provide the option to reset the score and results.
-Use at least 1 component.
-There should be some aspect of dynamic styling (e.g. winning message in green, losing message in red).
+[Array Manipulation in JS](https://stackoverflow.com/questions/9792927/javascript-array-search-and-remove-string)
+
+[Emit Events from child components](https://forum.vuejs.org/t/passing-data-back-to-parent/1201/2)
+
+## Notes for myself
+I don't have a way to reset all the colors on all the buttons in each individual component when game resets... I would leave this as a feature...
+
+There is some bug on the game.js line 160, causes a bug at the end game, the function works, just a console log.
+
+Also one of the click handlers probably didn't return true/false at the end of execution causing some bug. I think the error is because the for loop took longer to execute than the rest of the program and the bottom bits ran first.

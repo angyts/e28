@@ -22,7 +22,7 @@
 
 <script type='text/x-template' id='checkanswer-pin'>
     <div class="col-6">
-        <button type="button" class="btn btn-circle black"></button>
+        <button type="button" class="btn btn-circle" :class="colour"></button>
     </div>
 </script>
 
@@ -30,21 +30,17 @@
     <div class="row gamerow row1 p-1">
         <div class="col-8">
             <div class="row">
-                <game-pin></game-pin>
-                <game-pin></game-pin>
-                <game-pin></game-pin>
-                <game-pin></game-pin>
+                <game-pin :is-old-row="isOldRow" v-for="(pin, index) in pins" :key="index" :index="index"
+                          @pinChanged="pinChanged"></game-pin>
             </div>
         </div>
 
         <div class="col-4">
-            <div class="row">
-                <checkanswer-pin></checkanswer-pin>
-                <checkanswer-pin></checkanswer-pin>
-            </div>
-            <div class="row">
-                <checkanswer-pin></checkanswer-pin>
-                <checkanswer-pin></checkanswer-pin>
+            <div class="row" v-if="checkAnswer[0]">
+                <checkanswer-pin v-for="(pin, index) in checkAnswer[0].black" colour="black"
+                                 :key="index"></checkanswer-pin>
+                <checkanswer-pin v-for="(pin, index) in checkAnswer[0].white" colour="white"
+                                 :key="10+index"></checkanswer-pin>
             </div>
         </div>
     </div>
@@ -76,37 +72,51 @@
         </div>
         <div class="row justify-content-center p-2">
             <div class="container-fluid col-2">
-                Hi, I need some help, Here are the game instructions
+                Hi, I need some help, here are the game instructions.
+                <br><br>
+                Try to guess the computer's pins
+                <br><br>
+                you get a black pin for every pin that is the correct color in the right location.
+                <br><br>
+                You get a white pin for every pin that is the correct color but wrong location.
+                <br><br>
+                You win if you get all the combination right within 12 tries!
             </div>
             <div class="container col-8 gameboard border border-primary">
-                <ans-row :answers="finalAnswer"></ans-row>
-                <!-- TODO There is a way to dynamically insert components https://css-tricks.com/creating-vue-js-component-instances-programmatically/ -->
-                <game-row></game-row>
-                <game-row></game-row>
-                <game-row></game-row>
-                <game-row></game-row>
-                <game-row></game-row>
-                <game-row></game-row>
-                <game-row></game-row>
-                <game-row></game-row>
-                <game-row></game-row>
-                <game-row></game-row>
-                <game-row></game-row>
-                <game-row></game-row>
+                <ans-row :answers="finalAnswer" v-if="endGame"></ans-row>
+                <game-row v-for="(round, index) in rounds" :key='index' ref="index"
+                          :class="{ 'inactive-row': !round.isActive }" :is-old-row="rounds[index].isOldRow"
+                          :check-answer="recordOfAllAnswers.filter(answer => answer.id == index)"></game-row>
 
                 <div class="container footer">
                     <div class="row">
                         <div class="col-6">
-                            <button type="submit" class="btn btn-info" onclick="">Check Answer</button>
-                        </div>
-                        <div class="col-6">
-                            <button type="reset" class="btn btn-info" onclick="">Reset</button>
+                            <button type="button" class="btn btn-info" @click="checkAnswer">Check Answer</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="container-fluid col-2">
-                This is a running score board, as well as a chance to reset all your scores
+                Let's
+                <div class="col-6">
+                    <button type="button" class="btn btn-info" @click="restart" :disabled="!endGame">Start</button>
+                </div>
+                another game!
+                <br><br>
+                This is a running score board
+                <br><br>
+
+                <p v-for="(attempt, index) in recordOfAllAttempts">
+                    On round {{ index }} the <span v-if="attempt.won">Human</span><span v-else>Computer</span> Won <span
+                        v-if="attempt.won"> after {{ attempt.moves }} turn/s</span>
+
+                </p>
+                <br><br>
+                As well as a chance to
+                <div class="col-6">
+                    <button type="reset" class="btn btn-info" @click="reset">Reset</button>
+                </div>
+                all your scores
             </div>
         </div>
     </div>
