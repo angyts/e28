@@ -44,5 +44,18 @@ https://docs.aws.amazon.com/cli/latest/reference/s3/sync.html
 ###Use NPM package
 https://www.npmjs.com/package/deploy-aws-s3-cloudfront 
 
+### Vue-cli add on 
+https://github.com/multiplegeorges/vue-cli-plugin-s3-deploy
+
+### I love bash
+https://www.tothenew.com/blog/automating-deployment-of-a-static-website-hosted-on-amazon-s3/
+https://s3tools.org/s3cmd
+
+### I love third party tools
+Travis CI
+https://app.wercker.com/sessions/new?return_url=%2F
+https://codeship.com/
+https://app.shippable.com/
+
 ## Another paragraph <a name="paragraph2"></a>
 The second paragraph text

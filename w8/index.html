@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+    <title>Week 6 Examples</title>
+    <meta charset='utf-8'>
+    <link href=data:, rel=icon>
+
+    <script src='js/master.js' defer></script>
+
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Week 6 Examples</h1>
+
+    <div id='app' v-cloak>
+        <round-detail
+                v-for='round in rounds'
+                v-bind:key='round.number'
+                v-bind:number='round.number'
+                v-bind:winner='round.winner'
+                v-on:delete-round='deleteRound($event)'>
+
+            <template v-slot:coin>The coin landed on {{ round.coin }}</template>
+            <template v-slot:choice>The player chose {{ round.choice }}</template>
+        </round-detail>
+    </div>
+
+</body>
+
+</html>
