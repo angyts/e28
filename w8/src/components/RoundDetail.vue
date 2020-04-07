@@ -1,5 +1,5 @@
 <template>
-    <div v-if='!deleted'>
+    <div v-if='!deleted' class="winner">
         <ul>
             <li>Round #: {{ number }}</li>
             <li>Winner: {{ winner }}</li>
@@ -35,6 +35,10 @@
     };
 </script>
 
-<style scoped>
+<style scoped lang='scss'>
+    $green: #77ff33;
 
+    .winner {
+        background-color: $green;
+    }
 </style>
