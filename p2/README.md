@@ -1,11 +1,22 @@
-*Any instructions/notes in italics should be removed from the template before submitting* 
+*Any instructions/notes in italics should be removed from the template before submitting*
 
-# Project 1
+# Project 2
 + By: *your first and last name*
-+ Production URL: <http://e28p1.yourdomain.com>
++ Production URL: <http://e28p2.yourdomain.com>
+
+## Pages summary
+*List the "pages" of your application*
+
+## SFC summary
+*List the SFCs of your application*
+  
+## Server interaction
+*List the features in your application that are persisting and retrieving data from the server*
 
 ## Outside resources
-*your list of outside resources go here*
+*Your list of outside resources go here*
 
 ## Notes for instructor
-*any notes for me to refer to while grading; if none, omit this section*
+*Any notes for me to refer to while grading; if none, omit this section*
+
+## My own notes
