@@ -15,8 +15,30 @@
 
 ## Outside resources
 *Your list of outside resources go here*
+Bootstrap
+Bootstrap-Vue
+Vue Router
+Moment
+vuejs-datepicker
 
 ## Notes for instructor
 *Any notes for me to refer to while grading; if none, omit this section*
 
-## My own notes
+## My own notes for design process
+I am building an application to help roster nurses to work. I am now focusing on the admin view first.
+
+### Project requirements
+- Auth, Users, Permissions
+- SMS/Email integration
+- Generate reports
+- Front end Vue
+- Back end Django API based on postgresQL 
+- Auto allocate shifts based on past patterns
+- Distinguish between weekdays/weekends/holidays (perhaps find out which days are holidays automatically)
+- Clock-in/Clock-out
+
+### Focus on the MVP
+- Front end
+- Admin View only
+- Minimum pages: Calender View, Day View, Shift details view
+- Stretch goals: Employee View
