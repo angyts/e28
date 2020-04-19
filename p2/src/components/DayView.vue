@@ -121,14 +121,12 @@
             };
         },
         methods: {
-            added() {
-                this.message = "Your Shifts have been added";
-            },
             resetMessage() {
                 this.message = '';
             },
             addShift() {
                 if (this.addShiftDropdown) {
+                    this.message = `Adding ${this.shiftName} Right Now!`;
                     let epochtimeStart = moment(this.dateToAdd).set({
                         'hour': this.startTimeToAdd.substring(0, 2),
                         'minute': this.startTimeToAdd.substring(3, 2)
@@ -149,11 +147,10 @@
                     };
                     this.$emit('shiftAdded', shiftToAdd);
                     app.api.add('shifts', shiftToAdd).then(response => {
+                        this.message = `Your ${this.shiftName} have been added`;
                         console.log(response);
+                        setTimeout(this.resetMessage, 2000);
                     });
-                    this.message = "Adding Shifts Right Now!";
-                    setTimeout(this.added, 2000);
-                    setTimeout(this.resetMessage, 4000);
                 }
                 this.addShiftDropdown = !this.addShiftDropdown;
             },

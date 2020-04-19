@@ -3,14 +3,16 @@ import App from './App.vue'
 import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
 import VueRouter from 'vue-router'
 
-import HomeView from '@/components/HomeView';
-import DayView from "@/components/DayView";
-import WeekView from "@/components/WeekView";
-import MonthView from "@/components/MonthView";
+import HomeView from '@/components/HomeView'
+import DayView from "@/components/DayView"
+import WeekView from "@/components/WeekView"
+import MonthView from "@/components/MonthView"
+// TODO for development server only
+import adminPage from "@/components/adminPage"
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import vuetify from './plugins/vuetify';
+import vuetify from './plugins/vuetify'
 
 // Install BootstrapVue
 Vue.use(BootstrapVue)
@@ -25,6 +27,8 @@ const routes = [
     {path: '/day', component: DayView, name: 'Day View'},
     {path: '/week', component: WeekView, name: 'Weekly view'},
     {path: '/month', component: MonthView, name: 'Monthly View'},
+    // TODO for development server only
+    {path: '/adminseed', component: adminPage, name: 'Admin Seed'},
     // path: '*' for 404
 ];
 

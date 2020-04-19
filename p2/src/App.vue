@@ -54,6 +54,7 @@
                             <b-nav-item to="/day" exact exact-active-class="active">Day View</b-nav-item>
                             <b-nav-item to="/week" exact exact-active-class="active">Week View</b-nav-item>
                             <b-nav-item to="/month" exact exact-active-class="active">Month View</b-nav-item>
+                            <b-nav-item to="/adminseed" exact exact-active-class="active">Seed</b-nav-item>
                         </b-nav>
                     </b-collapse>
                 </b-navbar>
