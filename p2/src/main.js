@@ -7,6 +7,9 @@ import HomeView from '@/components/HomeView'
 import DayView from "@/components/DayView"
 import WeekView from "@/components/WeekView"
 import MonthView from "@/components/MonthView"
+
+import UserProfileView from "@/components/UserProfileView";
+import EmployeesView from "@/components/EmployeesView";
 // TODO for development server only
 import adminPage from "@/components/adminPage"
 
@@ -27,6 +30,9 @@ const routes = [
     {path: '/day', component: DayView, name: 'Day View'},
     {path: '/week', component: WeekView, name: 'Weekly view'},
     {path: '/month', component: MonthView, name: 'Monthly View'},
+    // Users
+    {path: '/user', component: UserProfileView, name: 'User View'},
+    {path: '/employee', component: EmployeesView, name: 'Employees View'},
     // TODO for development server only
     {path: '/adminseed', component: adminPage, name: 'Admin Seed'},
     // path: '*' for 404

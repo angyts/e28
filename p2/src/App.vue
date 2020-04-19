@@ -3,7 +3,7 @@
         <!-- https://bootstrap-vue.js.org/docs/components/navbar/ -->
         <div>
             <b-navbar toggleable="lg" type="dark" variant="primary">
-                <b-navbar-brand href="#">Zenith Schedules</b-navbar-brand>
+                <b-navbar-brand href="/">Zenith Schedules</b-navbar-brand>
 
                 <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -16,24 +16,14 @@
 
                     <!-- Right aligned nav items -->
                     <b-navbar-nav class="ml-auto">
-                        <b-nav-form>
-                            <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
-                            <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
-                        </b-nav-form>
-
-                        <b-nav-item-dropdown text="Lang" right>
-                            <b-dropdown-item href="#">EN</b-dropdown-item>
-                            <b-dropdown-item href="#">ES</b-dropdown-item>
-                            <b-dropdown-item href="#">RU</b-dropdown-item>
-                            <b-dropdown-item href="#">FA</b-dropdown-item>
-                        </b-nav-item-dropdown>
-
                         <b-nav-item-dropdown right>
                             <!-- Using 'button-content' slot -->
                             <template v-slot:button-content>
-                                <em>User</em>
+                                <b>Admin Panel</b>
                             </template>
-                            <b-dropdown-item href="#">Profile</b-dropdown-item>
+                            <b-dropdown-item to="/user">User Profile</b-dropdown-item>
+                            <b-dropdown-item to="/employee">Employees</b-dropdown-item>
+                            <b-dropdown-item to="/adminseed">Seed</b-dropdown-item>
                             <b-dropdown-item href="#">Sign Out</b-dropdown-item>
                         </b-nav-item-dropdown>
                     </b-navbar-nav>
@@ -44,8 +34,8 @@
             <div class="container">
                 <b-navbar toggleable="lg" type="light" variant="warning">
                     <b-navbar-toggle target="nav-collapse-2"></b-navbar-toggle>
-                    <b-navbar-brand href="#">You are on the {{currentRouteName}}</b-navbar-brand>
-                    <datepicker :bootstrap-styling="true" v-if="currentRouteName === 'Day View'"
+                    <b-navbar-brand href="#">{{ chosenDay }}</b-navbar-brand>
+                    <datepicker :bootstrap-styling="true"
                                 v-model="chosenDate"
                                 name="datepicker"></datepicker>
                     <b-collapse id="nav-collapse-2" is-nav>
@@ -54,23 +44,17 @@
                             <b-nav-item to="/day" exact exact-active-class="active">Day View</b-nav-item>
                             <b-nav-item to="/week" exact exact-active-class="active">Week View</b-nav-item>
                             <b-nav-item to="/month" exact exact-active-class="active">Month View</b-nav-item>
-                            <b-nav-item to="/adminseed" exact exact-active-class="active">Seed</b-nav-item>
                         </b-nav>
                     </b-collapse>
                 </b-navbar>
-                <div>
-
-                    Chosen: {{chosenDate}}
-
-                    Month: {{ chosenMonth }}
-
-                    Day: {{ chosenDay }}
-
-                    Chosen day MOnth: {{ chosenDayMonthYear }}
-                </div>
                 <b-card-body>
-                    <router-view v-on:shiftAdded='shiftAdded($event)' :chosenDate="chosenDayMonthYear"
-                                 :shifts="shifts"></router-view>
+                    <router-view v-on:shiftAdded='shiftAdded($event)'
+                                 v-on:shiftDeleted='shiftDeleted($event)'
+                                 v-on:staffAdded='staffAdded($event)'
+                                 :chosenDate="chosenDayMonthYear"
+                                 :shifts="shifts"
+                                 :staffs="staffs"
+                    ></router-view>
                 </b-card-body>
             </div> <!-- /container -->
         </div>
@@ -81,6 +65,8 @@
     import * as app from '@/common/app.js'
     import Datepicker from 'vuejs-datepicker'
 
+    let _ = require('lodash');
+
     var moment = require('moment');
     export default {
         name: 'App',
@@ -90,15 +76,13 @@
         data: function () {
             return {
                 chosenDate: new Date(),
-                shifts: []
+                shifts: [],
+                staffs: [],
             }
         },
         computed: {
             currentRouteName() {
                 return this.$route.name;
-            },
-            chosenMonth() {
-                return moment(this.chosenDate).format('MMM');
             },
             chosenDay() {
                 return moment(this.chosenDate).format('dddd');
@@ -109,13 +93,23 @@
         },
         mounted: function () {
             app.api.all('shifts').then(response => {
-                console.log(response);
                 this.shifts = response;
+            });
+            app.api.all('staff').then(response => {
+                this.staffs = response;
             });
         },
         methods: {
             shiftAdded: function (shiftToAdd) {
                 this.shifts.push(shiftToAdd);
+            },
+            shiftDeleted: function (shiftToDelete) {
+                this.shifts = _.remove(this.shifts, function (n) { // TODO need to read up about lodash... wierd it works upside down
+                    return n.id !== shiftToDelete.id;
+                });
+            },
+            staffAdded: function (staff) {
+                this.staffs.push(staff);
             }
         }
     }

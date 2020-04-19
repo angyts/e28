@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-        This is the Day view page for the {{ chosenDate }}
         <div class="row">
             <b-button block variant="primary" @click.prevent="addShift">Add Shift</b-button>
         </div>
@@ -60,6 +59,12 @@
                 {{message}}
             </div>
         </transition>
+        <div v-if="selectedShift.staff != undefined" class="alert alert-success" role="alert">
+            <span v-for="(staff, id) in selectedShift.staff" :key="id">{{ staff.name }} is rostered.</span>
+        </div>
+        <div class="row" v-if="deleteShiftView">
+            <b-button block variant="danger" @click.prevent="deleteShiftConfirm">Delete Shift</b-button>
+        </div>
         <div class="row">
             <div class="col-10" id="shiftrow">
                 <v-calendar
@@ -71,20 +76,21 @@
                         :event-color="getEventColor"
                         :short-intervals="false"
                         :type="'day'"
+                        :hide-header="true"
+                        @click:event="deleteShift"
                 ></v-calendar>
             </div>
             <div class="col-2" id="peoplerow">
                 <div class="row">
-                    <div class="col-md-6">
-                        This is one employer
-                    </div>
-                    <div class="col-md-6">
-                        This is another employer
-                    </div>
-                    <div class="col-md-6">
-                        This is yet another employer
-                    </div>
-
+                    <b-button @click="selectEmployee(staff)"
+                              class="col-xl-6"
+                              variant="outline-primary"
+                              v-for="(staff, id) in staffs"
+                              :key="id">
+                        <show-employee
+                                :staff="staff"
+                        ></show-employee>
+                    </b-button>
                 </div>
             </div>
         </div>
@@ -92,28 +98,34 @@
 </template>
 
 <script>
-    import * as firebase from 'firebase/app';
+    import * as firebase from 'firebase/app'
     import * as app from '@/common/app.js'
     import Datepicker from 'vuejs-datepicker'
+    import ShowEmployee from "@/components/ShowEmployee"
 
     var moment = require('moment');
 
     export default {
         name: "DayView",
         components: {
-            Datepicker
+            Datepicker,
+            ShowEmployee
         },
-        props: ['chosenDate', 'shifts'],
+        props: ['chosenDate', 'shifts', 'staffs'],
         data: function () {
             return {
                 // View Events
-                addShiftDropdown: true,
+                addShiftDropdown: false,
+                deleteShiftView: false,
                 message: '',
                 // Date to add data
                 dateToAdd: new Date(),
                 startTimeToAdd: "08:00",
                 endTimetoAdd: "13:00",
                 shiftName: "Morning Shift",
+                // Data to delete shifts
+                selectedShift: {},
+                selectedElement: null, // TODO Need to understand From vuetify https://codepen.io/pen/?editors=1010
                 // Vuetify calendar options
                 dayStartsTime: "15", // TODO build an admin portal, start of the day option, but it is according the to interval
                 intervalminutes: "30", // TODO shows intervals, default is 60
@@ -145,18 +157,47 @@
                         startFormatted: startFormatted,
                         endFormatted: endFormatted,
                     };
-                    this.$emit('shiftAdded', shiftToAdd);
+
                     app.api.add('shifts', shiftToAdd).then(response => {
                         this.message = `Your ${this.shiftName} have been added`;
-                        console.log(response);
+                        shiftToAdd.id = response;
+                        this.$emit('shiftAdded', shiftToAdd);
                         setTimeout(this.resetMessage, 2000);
                     });
                 }
                 this.addShiftDropdown = !this.addShiftDropdown;
             },
-            getEventColor(event) {
-                return event.color
+            deleteShift({nativeEvent, event}) {
+                this.selectedShift = event;
+                this.selectedElement = nativeEvent.target; // TODO not sure what this does
+                this.deleteShiftView = true;
+                this.message = 'Click on Staff to Roster this Staff';
             },
+            deleteShiftConfirm() {
+                this.deleteShiftView = false;
+                let shift = this.selectedShift;
+                this.message = `Your ${shift.name} have been deleted`;
+                this.$emit('shiftDeleted', shift);
+                app.api.delete('shifts', shift.id);
+                setTimeout(this.resetMessage, 2000);
+            },
+            getEventColor(event) {
+                if (event.staff != undefined) {
+                    return 'bg-primary';
+                }
+                return event.color;
+            },
+            selectEmployee(staff) {
+                if (this.selectedShift !== {}) {
+                    if (this.selectedShift.staff == undefined) {
+                        this.selectedShift.staff = [];
+                    }
+                    // TODO Check if staff is already rostered, if it is can toggle to remove staff
+                    this.selectedShift.staff.push(staff);
+                    app.api.update('shifts', this.selectedShift.id, this.selectedShift);
+                    this.message = "Successfully updated";
+                }
+            }
         }
     }
 </script>

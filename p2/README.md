@@ -48,3 +48,9 @@ Vuetify calendar components:
 https://github.com/vuetifyjs/vuetify/issues/9999
 
 Shift accross Days will not be supported
+
+### TODOs
+Image upload
+Drag and drop
+Image to appear on the Calendar event.
+When the data base grows, instead of retrieving all the shifts, need to filter the shifts.

@@ -16,9 +16,10 @@
 </template>
 
 <script>
-    import * as app from '@/common/app.js';
+    import * as app from '@/common/app.js'
     // Used for seeding firestore
-    import {shifts} from '@/seeds/shifts.js';
+    import {shifts} from '@/seeds/shifts.js'
+    import {staff} from '@/seeds/staff.js'
 
     export default {
         name: '',
@@ -27,6 +28,7 @@
                 message: '',
                 collections: {
                     'shifts': shifts,
+                    'staff': staff,
                 }
             };
         },

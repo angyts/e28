@@ -96,6 +96,20 @@ export default class Api {
     }
 
     /**
+     * Update a document to a collection
+     */
+    async update(collection, id, document) {
+        try {
+            await this.api
+                .collection(collection)
+                .doc(id)
+                .set(document);
+        } catch (error) {
+            return 'Error adding document: ' + error;
+        }
+    }
+
+    /**
      * Delete a document from a collection by id
      */
     delete(collection, id) {
