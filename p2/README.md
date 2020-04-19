@@ -42,3 +42,9 @@ I am building an application to help roster nurses to work. I am now focusing on
 - Admin View only
 - Minimum pages: Calender View, Day View, Shift details view
 - Stretch goals: Employee View
+
+### Known bugs
+Vuetify calendar components:
+https://github.com/vuetifyjs/vuetify/issues/9999
+
+Shift accross Days will not be supported

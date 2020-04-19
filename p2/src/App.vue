@@ -45,8 +45,9 @@
                 <b-navbar toggleable="lg" type="light" variant="warning">
                     <b-navbar-toggle target="nav-collapse-2"></b-navbar-toggle>
                     <b-navbar-brand href="#">You are on the {{currentRouteName}}</b-navbar-brand>
-                    <datepicker v-if="currentRouteName === 'Day View'" v-model="chosenDate"
-                                name="uniquename"></datepicker>
+                    <datepicker :bootstrap-styling="true" v-if="currentRouteName === 'Day View'"
+                                v-model="chosenDate"
+                                name="datepicker"></datepicker>
                     <b-collapse id="nav-collapse-2" is-nav>
                         <b-nav pills class="ml-auto">
                             <b-nav-item to="/" exact exact-active-class="active">Home</b-nav-item>
@@ -67,7 +68,8 @@
                     Chosen day MOnth: {{ chosenDayMonthYear }}
                 </div>
                 <b-card-body>
-                    <router-view :chosenDate="chosenDate"></router-view>
+                    <router-view v-on:shiftAdded='shiftAdded($event)' :chosenDate="chosenDayMonthYear"
+                                 :shifts="shifts"></router-view>
                 </b-card-body>
             </div> <!-- /container -->
         </div>
@@ -79,7 +81,6 @@
     import Datepicker from 'vuejs-datepicker'
 
     var moment = require('moment');
-
     export default {
         name: 'App',
         components: {
@@ -88,6 +89,7 @@
         data: function () {
             return {
                 chosenDate: new Date(),
+                shifts: []
             }
         },
         computed: {
@@ -101,13 +103,19 @@
                 return moment(this.chosenDate).format('dddd');
             },
             chosenDayMonthYear() {
-                return moment(this.chosenDate).format('DD-MMMM-YYYY');
+                return moment(this.chosenDate).format('YYYY-MM-DD');
             }
         },
         mounted: function () {
             app.api.all('shifts').then(response => {
                 console.log(response);
+                this.shifts = response;
             });
+        },
+        methods: {
+            shiftAdded: function (shiftToAdd) {
+                this.shifts.push(shiftToAdd);
+            }
         }
     }
 </script>
@@ -151,5 +159,4 @@
         margin-top: 2rem;
         margin-bottom: 2rem;
     }
-
 </style>

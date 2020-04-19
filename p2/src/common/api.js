@@ -39,9 +39,9 @@ export default class Api {
     }
 
     /**
-     * Get all the documents from a collection
+     * Get all the documents from a collection, returns as a object
      */
-    async all(collection) {
+    async allobj(collection) {
         let results = {};
         const querySnapshot = await this.api
             .collection(collection)
@@ -50,6 +50,35 @@ export default class Api {
             results[doc.id] = doc.data();
         });
         return results;
+    }
+
+    /**
+     * Get all the documents from a collection, returns as a list
+     */
+    async all(collection) {
+        let results = [];
+        const querySnapshot = await this.api
+            .collection(collection)
+            .get();
+        querySnapshot.forEach(doc => {
+            let newItem = doc.data();
+            newItem.id = doc.id
+            results.push(newItem);
+        });
+        return results;
+    }
+
+    /**
+     *  Filters documents from a collection
+     *  https://github.com/susanBuck/e28-spring20/issues/58
+     */
+    async filter(collection, field, operator, value) {
+        try {
+            const querySnapshot = await this.api.collection(collection).where(field, operator, value).get();
+            return querySnapshot.docs;
+        } catch (error) {
+            return 'Error getting documents: ' + error;
+        }
     }
 
     /**

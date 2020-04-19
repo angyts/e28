@@ -10,6 +10,7 @@ import MonthView from "@/components/MonthView";
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import vuetify from './plugins/vuetify';
 
 // Install BootstrapVue
 Vue.use(BootstrapVue)
@@ -35,5 +36,6 @@ const router = new VueRouter({
 
 new Vue({
     router: router,
-    render: h => h(App),
+    vuetify,
+    render: h => h(App)
 }).$mount('#app')
