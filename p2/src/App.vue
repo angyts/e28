@@ -24,7 +24,7 @@
                             <b-dropdown-item to="/user">User Profile</b-dropdown-item>
                             <b-dropdown-item to="/employee">Employees</b-dropdown-item>
                             <b-dropdown-item to="/adminseed">Seed</b-dropdown-item>
-                            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+                            <b-dropdown-item href="/">Sign Out</b-dropdown-item>
                         </b-nav-item-dropdown>
                     </b-navbar-nav>
                 </b-collapse>

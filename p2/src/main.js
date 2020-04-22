@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
-import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
+// import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
+import {BootstrapVue} from 'bootstrap-vue'
 import VueRouter from 'vue-router'
 
 import HomeView from '@/components/HomeView'
@@ -20,7 +21,7 @@ import vuetify from './plugins/vuetify'
 // Install BootstrapVue
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
-Vue.use(IconsPlugin)
+// Vue.use(IconsPlugin)
 Vue.use(VueRouter)
 
 Vue.config.productionTip = false
@@ -33,9 +34,10 @@ const routes = [
     // Users
     {path: '/user', component: UserProfileView, name: 'User View'},
     {path: '/employee', component: EmployeesView, name: 'Employees View'},
+    // TODO Login and logout paths
     // TODO for development server only
     {path: '/adminseed', component: adminPage, name: 'Admin Seed'},
-    // path: '*' for 404
+    // TODO path: '*' for 404
 ];
 
 const router = new VueRouter({

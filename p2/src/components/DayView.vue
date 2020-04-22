@@ -60,7 +60,10 @@
             </div>
         </transition>
         <div v-if="selectedShift.staff != undefined" class="alert alert-success" role="alert">
-            <span v-for="(staff, id) in selectedShift.staff" :key="id">{{ staff.name }} is rostered.</span>
+            The following stars are rostered:
+            <span v-for="(staff, id) in selectedShift.staff" :key="id"><show-employee
+                                :staff="staff"
+                        ></show-employee></span>
         </div>
         <div class="row" v-if="deleteShiftView">
             <b-button block variant="danger" @click.prevent="deleteShiftConfirm">Delete Shift</b-button>
@@ -102,6 +105,7 @@
     import * as app from '@/common/app.js'
     import Datepicker from 'vuejs-datepicker'
     import ShowEmployee from "@/components/ShowEmployee"
+    let _ = require('lodash');
 
     var moment = require('moment');
 
@@ -192,10 +196,15 @@
                     if (this.selectedShift.staff == undefined) {
                         this.selectedShift.staff = [];
                     }
-                    // TODO Check if staff is already rostered, if it is can toggle to remove staff
-                    this.selectedShift.staff.push(staff);
-                    app.api.update('shifts', this.selectedShift.id, this.selectedShift);
-                    this.message = "Successfully updated";
+                    if(_.find(this.selectedShift.staff, {id: staff.id})) {
+                      // TODO handle remove employee from shift or something, it is duplicate
+                    }
+                    else {
+                        this.selectedShift.staff.push(staff);
+                        app.api.update('shifts', this.selectedShift.id, this.selectedShift);
+                        this.message = ""; // force re-rendering
+                        this.message = "Successfully updated";
+                    }
                 }
             }
         }
