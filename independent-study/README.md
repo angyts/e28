@@ -1,6 +1,6 @@
 #Continuous Deployment of any static site to AWS S3 bucket in less than 30 minutes!
 
-# Table of contents
+#Table of contents
   - [Why do I want to do this?](#why-do-i-want-to-do-this)
   - [What is this about?](#what-is-this-about)
     - [Why?](#why)
@@ -21,7 +21,7 @@
     - [BONUS: What good is a long ugly endpoint?](#bonus-what-good-is-a-long-ugly-endpoint)
   - [Summary](#summary)
 
-## Why do I want to do this?
+##Why do I want to do this?
 Static sites are all the rage in the galaxy at the moment.
 
 The internet started with them, if you still can remember.
