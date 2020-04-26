@@ -9,6 +9,8 @@
 ## This is the introduction <a name="introduction"></a>
 Some introduction text, formatted in heading 2 style
 
+![TEst image](images/getting%20started.png)
+
 ###Why?
 - Cheap
 - Fast
