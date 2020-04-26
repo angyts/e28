@@ -1,4 +1,4 @@
-#Automate a Vue Site Deployment to AWS
+#Continuous Deployment of any static site to AWS S3 bucket in less than 30minutes!
 
 # Table of contents
 1. [Introduction](#introduction)
@@ -7,7 +7,12 @@
 3. [Another paragraph](#paragraph2)
 
 ## This is the introduction <a name="introduction"></a>
-Some introduction text, formatted in heading 2 style
+Static sites are all the rage in the galaxy at the moment. 
+
+The internet started with them, if you still can remember
+![Million Dollar Page](https://en.wikipedia.org/wiki/The_Million_Dollar_Homepage#/media/File:The_Million_Dollar_Homepage.png)
+ 
+ then we got adventurous running bigger and bigger backend servers.
 
 ![TEst image](images/getting%20started.png)
 
