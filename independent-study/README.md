@@ -333,14 +333,13 @@ Now that should get the magic started. Let's go back to check it out on the S3 d
 |:--:|
 | *It has magically appeared in your S3 bucket* |
 
-Test the website
-Visit the [`endpoint`](#endpoint) that you saved from above.
+Test the website by visiting the [`endpoint`](#endpoint) that you saved from above.
 
 | ![It worked!](images/worked.png) |
 |:--:|
 | *If you are seeing this, it has worked!* |
 
-You deserve a medal for seeing this :medal_sports:
+You deserve a medal if you see this :medal_sports:
 
 ### BONUS: What good is a long ugly endpoint?
 Who is going to visit this www.yourbucket-name-s3-website.aws-region-amazon-super-long-ugly-url-that-I-cant-remember?
