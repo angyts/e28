@@ -352,7 +352,7 @@ Go to [cloudflare](https://www.cloudflare.com/) to login/register an account. De
 |:--:|
 | *Cloudflare > Your Site > DNS* |
 
-Add a `CNAME` record, and put the `endpoint` as the target. For the `name`, if you want it to point to the root like `your-domain.com`, then key `@`. If you want it to point to a subdomain like `test.your-domain.com`, then type `test`.
+Add a `CNAME` record, and put the [`S3 bucket endpoint`](#endpoint) as the target. For the `name`, if you want it to point to the root like `your-domain.com`, then key `@`. If you want it to point to a subdomain like `test.your-domain.com`, then type `test`.
 
 Wait for a while, it can take a few days for DNS changes to propage.
 
