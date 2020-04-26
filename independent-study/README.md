@@ -43,34 +43,34 @@ And developers started moving towards a `serverless` stack which is quite a misn
 
 **This article will share with you how to "keep it simple", commit to github, publish to website, sleep in peace, rinse and repeat**
 
-##What is this about?
+## What is this about?
 By the end of this article, you should be able to:
 - Make a `git push`
 - Make `github actions` pick up on any deployments
 - Publish your site on an S3 bucket automatically
 
-###Why?
+### Why?
 - It's simple.
 - It's cheap, infinitely, actually free for low traffic sites.
 - It scales, infinitely.
 - You can run tests before you deploy (please stay tuned for the next article!).
 
-###Why Not?
+### Why Not?
 - It appears rather daunting. (If you stop reading here and not continue.)
 - The configurations might kill me. (Perhaps it might without a guiding hand here.)
 - Without some human eyeballs, you might actually deploy something you do not want to deploy out in the public domain. Like secrets, passwords, keys and who your girlfriend is. (You could start by adding [the following](https://github.com/punggolzenith/e28/blob/master/independent-study/.gitignore) to your `.gitignore`)
 - It's really static. :stuck_out_tongue_winking_eye: (Unless you start adding microservices, lambda functions, databases to it, and again, stay tuned for the next article)
 
-##Let's Dive in!
+## Let's Dive in!
 
 Here are the overview of the steps involved.
 
-###Start local Github repo, or use an existing one.
+### Start local Github repo, or use an existing one.
 Go to the directory you want to start your repo or an existing repo. `git init`. Write some code. Stage the changes with`git add thefilethatyouwanttoadd`. Then commit changes with `git commit -m "the message that you want to add for commit"`.
 
 How this Git repository lives on your PC and will start tracking all the changes. What if I get some errors? [Start by reading this](https://itnext.io/become-a-git-pro-in-just-one-blog-a-thorough-guide-to-git-architecture-and-command-line-interface-93fbe9bdb395).
 
-###Connect your repo to Github
+### Connect your repo to Github
 Go to Github.com, login/create account, and click the [new repository button](https://github.com/new) on the top left green button. Then follow the instructions there like:
 ```bash
 $ git remote add origin git@github.com:YourGitHubUsername/TheNameOfYourRepo
@@ -78,7 +78,7 @@ $ git push -u origin master
 ```
 Nice, seems like it is all nicely linked up now.
 
-###Explore Github Actions
+### Explore Github Actions
 We are going to use [this script](https://github.com/marketplace/actions/s3-sync) specifically by @jakejarvis to do all the magic.
 
 ```yaml
@@ -112,7 +112,7 @@ It will actually run the ubuntu server, then pull code from [@jakejarvis](https:
 
 In the next article, we will cover how we can actually get github to build our repo, run automated tests for our repo, and if tests are not failing, then deploy. For now, let's keep it simple
 
-###Let's actually make a Github Actions
+### Let's actually make a Github Actions
 | ![Github Actions](images/gh%20actions.png) |
 |:--:|
 | *Let's make a github actions* |
@@ -129,7 +129,7 @@ Configure the `SOURCE_DIR`: You can delete this if you want to deploy your entir
 
 Remember to run a `git pull` on your `local` machine to pull these new changes. You will notice that there is a new `.github/workflows/main.yml` created.
 
-###AWS S3
+### AWS S3
 Now let's switch gears and go into our AWS configurations.
 
 Let me start by saying that I am in no away affiliated to AWS and neither do I endorse them. I am however an old and lazy developer who are just used to using the same tools that I started with. So here I am. I'm sure it works pretty much the same on Netlify, Google cloud or Azure.
@@ -148,7 +148,7 @@ As well as your `Region`, this should be the same as the `AWS_REGION` setting in
 
 And please do remember, anything that is deployed is fully public.
 
-###Create a new AWS user to upload to your bucket
+### Create a new AWS user to upload to your bucket
 AWS is able to have very minute control over permissions and we will skip the details. In short, we need to create an AWS user that your Github actions can use to do a `put objects` request to the bucket.
 
 Now we go to top left Services > IAM > Users > New User
@@ -169,7 +169,7 @@ Save your `access ID` and `secret key`. This will be the only time you can save 
 |:--:|
 | *Save this user ARN somewhere* | <a name="arn-user"></a>
 
-###S3 Bucket Policies
+### S3 Bucket Policies
 Now we go back to the S3 bucket. Click on Permissions > Bucket Policy > Policy Generator (At the bottom).
 
 Also copy this `arn:aws:s3:::yourbucketname` after the `Bucket Policy Editor ARN:`. This string refers to your bucket. <a name="arn-bucket"></a>
@@ -186,7 +186,7 @@ Every S3 bucket is governed by some "rules" on who can do what, and every single
 
 The `Principal` refers to the user who will be given permissions to. And the Amazon Resource Name (ARN) will refer to your bucket.
 
-####Give `PutObject` and `DeleteObject` permissions
+#### Give `PutObject` and `DeleteObject` permissions
 Key the following settings
 - The [user ARN](#arn-user) that you saved above as the `Principal`.
 - AWS service as Amazon S3
@@ -194,7 +194,7 @@ Key the following settings
 - Amazon Resource Name (ARN):  The [bucket ARN](#arn-bucket) that you saved above including a `/*` to denote all objects in the bucket. For example: `arn:aws:s3:::yourbucketname/*`
 
 `Add Statement` when you are done.
-####Give `GetObject` permissions to public
+#### Give `GetObject` permissions to public
 This website needs to be accessible by the public right?
 
 Key the following settings
@@ -207,7 +207,7 @@ Key the following settings
 
 Once you have added these 2 statements, you can `Generate Policy`, then cut and paste this policy into your Bucket Policy and save. They will again warn you that you are giving public access.
 
-###S3 Static Site Hosting
+### S3 Static Site Hosting
 Now we need to turn on `static site hosting` from AWS S3. Meaning that AWS will now serve the entire bucket as if it is a website, how cool is that, our days of server configurations are over.
 
 | ![Static Site](images/static%20site.png) |
@@ -222,7 +222,7 @@ Copy down your `Endpoint`, you might need that for your domain name configuratio
 
 The `index document` is your entry point into your website. In our example, we will use `index.html` and save. (Which obviously doesn't exist yet, but soon will)
 
-###Github Secrets
+### Github Secrets
 :sweat: Phew that was quite a lot of configurations. Ok, now we are done with all the S3 configurations. Now back to github, since we are not going to commit our `secrets` and dirty underwear for the whole world to see, we are going to trust github with keeping these secrets for us.
 
 Go back to your repo.
@@ -236,7 +236,7 @@ Go ahead and add the following secrets:
 - `AWS_ACCESS_KEY_ID` : [Your access key ID](#arn-keys)
 - `AWS_SECRET_ACCESS_KEY` : [Your access key secret](#arn-keys)
 
-###OK we have everything wired up!
+### OK we have everything wired up!
 :joy: Finally, time to rock and roll.
 
 Let's go back to our code editor on your local machine and test it out.
@@ -312,7 +312,7 @@ Visit the [`endpoint`](#endpoint) that you saved from above.
 
 You deserve a medal for seeing this :medal_sports:
 
-###BONUS: What good is a long ugly endpoint?
+### BONUS: What good is a long ugly endpoint?
 Who is going to visit this www.yourbucket-name-s3-website.aws-region-amazon-super-long-ugly-url-that-I-cant-remember?
 
 So, let's wire it up with a real domain. Firstly you have to buy or get a domain. (How? That would be beyond this article.)
@@ -331,6 +331,6 @@ Then you will finally see your website showup at your own domain.
 
 Bonus-bonus: You get a free SSL (You will see a lock on the top left corner of your website) from cloudflare.
 
-##Summary
+## Summary
 In this article, we have learnt how to create a github repo, attach a github action hook to deploy our static site to S3 automatically. We also have learnt some basics of S3 bucket configurations.
 Thank you for reading this and hope you enjoyed it as much as I had in making this.
