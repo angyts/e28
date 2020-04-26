@@ -9,11 +9,14 @@
 ## This is the introduction <a name="introduction"></a>
 Static sites are all the rage in the galaxy at the moment. 
 
-The internet started with them, if you still can remember
-![Million Dollar Page](https://en.wikipedia.org/wiki/The_Million_Dollar_Homepage#/media/File:The_Million_Dollar_Homepage.png)
- 
- then we got adventurous running bigger and bigger backend servers.
+The internet started with them, if you still can remember.
+| ![Million Dollar Page](images/million-dollar-page.png) | 
+|:--:| 
+| *Million dollar page screenshot (Disclaimer: I am not affiliated with them in any way)* |
 
+ 
+Then we got adventurous running bigger and bigger backend servers with whatever programming language we can lay our hands on. 
+The trouble we soon realised is that there are simply too many humans in this world, and 
 ![TEst image](images/getting%20started.png)
 
 ###Why?
