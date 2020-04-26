@@ -356,13 +356,15 @@ Add a `CNAME` record, and put the [`S3 bucket endpoint`](#endpoint) as the targe
 
 Wait for a while, it can take a few days for DNS changes to propage.
 
-Then you will finally see your website showup at your own domain.
+Then you will finally see your website show up at your own domain.
 
 Bonus-bonus: You get a free SSL (You will see a lock on the top left corner of your website) from cloudflare.
 
 ## Summary
-In this article, we have learnt how to create a github repo, attach a github action hook to deploy our static site to S3 automatically. We also have learnt some basics of S3 bucket configurations.
-Thank you for reading this and hope you enjoyed it as much as I had in making this.
+In this article, we have learnt how to create a github repo, attach a github action hook to deploy our static site to S3 automatically. We also have learnt some basics of S3 bucket, github actions and github secrets configurations.
+Thank you for reading this and hope you enjoyed it as much as I had in making this. Please submit a pull request for raise an issues at github if any issues.
 
 ## References/Resources
+Github actions documentation.
+
 [Useful table of contents generator](https://luciopaiva.com/markdown-toc/)
