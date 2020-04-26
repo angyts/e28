@@ -29,41 +29,57 @@ The internet started with them, if you still can remember.
 |:--:|
 | *Million dollar page screenshot (Disclaimer: I am not affiliated with them in any way)* |
 
-Then we got adventurous running bigger and bigger backend servers with whatever programming language we can lay our hands on.
-The trouble we soon realised is that there are simply too many humans in this world, and the moment something goes viral, **everyone** wants to have a piece of it.
+Then we got adventurous running bigger and bigger backend servers with whatever programming language we can lay our hands on to make websites dynamic.
+The trouble we soon realised is that there are simply too many humans in this world, and the moment something goes viral, **everyone** wants to have a piece of it. How much can a server take before...
 | ![Burning Servers](images/burning.jpg) |
 |:--:|
-| *Burning Servers* |
+| *servers start burning* |
 
 Me sleeping at 3am: "No Sir, I'm not going to rescue your burning servers right now, not even if you pay me double."
 
 So we came up with more and more complexity in autoscaling, CDN and many crowd control measures. They still work and are very much a large part of our current world, nothing wrong.
 
-And developers started moving towards a `serverless` stack which is quite a misnomer as well. Before discovering a [new type of hell](https://medium.com/xebia-engineering/11-reasons-why-you-are-going-to-fail-with-microservices-29b93876268b).
+Now developers started moving towards a `serverless` stack which is quite a misnomer as well. Before discovering a [new type of hell](https://medium.com/xebia-engineering/11-reasons-why-you-are-going-to-fail-with-microservices-29b93876268b).
 
 **This article will share with you how to "keep it simple", commit to github, publish to website, sleep in peace, rinse and repeat**
 
-## What is this about?
+## What is this all about?
 By the end of this article, you should be able to:
 - Make a `git push`
 - Make `github actions` pick up on any deployments
 - Publish your site on an S3 bucket automatically
 
+You should be able to go from zero to hero from this article.
+
 ### Why?
-- It's simple.
+- It's quite simple once you understand the logic.
 - It's cheap, infinitely, actually free for low traffic sites.
 - It scales, infinitely.
 - You can run tests before you deploy (please stay tuned for the next article!).
 
 ### Why Not?
 - It appears rather daunting. (If you stop reading here and not continue.)
-- The configurations might kill me. (Perhaps it might without a guiding hand here.)
+- The configurations might kill me. (Perhaps it might without a guiding hand :hand: here.)
 - Without some human eyeballs, you might actually deploy something you do not want to deploy out in the public domain. Like secrets, passwords, keys and who your girlfriend is. (You could start by adding [the following](https://github.com/punggolzenith/e28/blob/master/independent-study/.gitignore) to your `.gitignore`)
 - It's really static. :stuck_out_tongue_winking_eye: (Unless you start adding microservices, lambda functions, databases to it, and again, stay tuned for the next article)
 
 ## Let's Dive in!
 
-Here are the overview of the steps involved.
+Here is an overview of the steps involved.
+
+    - [Start local Github repo, or use an existing one.](#start-local-github-repo-or-use-an-existing-one)
+    - [Connect your repo to Github](#connect-your-repo-to-github)
+    - [Explore Github Actions](#explore-github-actions)
+    - [Let's actually make a Github Actions](#lets-actually-make-a-github-actions)
+    - [AWS S3](#aws-s3)
+    - [Create a new AWS user to upload to your bucket](#create-a-new-aws-user-to-upload-to-your-bucket)
+    - [S3 Bucket Policies](#s3-bucket-policies)
+      - [Give `PutObject` and `DeleteObject` permissions](#give-putobject-and-deleteobject-permissions)
+      - [Give `GetObject` permissions to public](#give-getobject-permissions-to-public)
+    - [S3 Static Site Hosting](#s3-static-site-hosting)
+    - [Github Secrets](#github-secrets)
+    - [OK we have everything wired up!](#ok-we-have-everything-wired-up)
+    - [BONUS: What good is a long ugly endpoint?](#bonus-what-good-is-a-long-ugly-endpoint)
 
 ### Start local Github repo, or use an existing one.
 Go to the directory you want to start your repo or an existing repo. `git init`. Write some code. Stage the changes with`git add thefilethatyouwanttoadd`. Then commit changes with `git commit -m "the message that you want to add for commit"`.
@@ -334,3 +350,6 @@ Bonus-bonus: You get a free SSL (You will see a lock on the top left corner of y
 ## Summary
 In this article, we have learnt how to create a github repo, attach a github action hook to deploy our static site to S3 automatically. We also have learnt some basics of S3 bucket configurations.
 Thank you for reading this and hope you enjoyed it as much as I had in making this.
+
+## References/Resources
+[Useful table of contents generator](https://luciopaiva.com/markdown-toc/)
