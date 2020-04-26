@@ -81,7 +81,15 @@ Here is an overview of the steps involved:
 1. [BONUS: What good is a long ugly endpoint?](#bonus-what-good-is-a-long-ugly-endpoint)
 
 ### Start local Github repo, or use an existing one.
-Go to the directory you want to start your repo or an existing repo. `git init`. Write some code. Stage the changes with`git add thefilethatyouwanttoadd`. Then commit changes with `git commit -m "the message that you want to add for commit"`.
+Go to the directory you want to start your repo or an existing repo. 
+
+`git init`. 
+
+Write some code. 
+
+Stage the changes with`git add thefilethatyouwanttoadd`. 
+
+Then commit changes with `git commit -m "the message that you want to add for commit"`.
 
 How this Git repository lives on your PC and will start tracking all the changes. What if I get some errors? [Start by reading this](https://itnext.io/become-a-git-pro-in-just-one-blog-a-thorough-guide-to-git-architecture-and-command-line-interface-93fbe9bdb395).
 
