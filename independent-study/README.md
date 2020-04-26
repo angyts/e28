@@ -155,7 +155,7 @@ Remember to run a `git pull` on your `local` machine to pull these new changes. 
 ### AWS S3
 Now let's switch gears and go into our AWS configurations.
 
-Let me start by saying that I am in no away affiliated to AWS and neither do I endorse them. I am however an old and lazy developer who are just used to using the same tools that I started with. So here I am. I'm sure it works pretty much the same on Netlify, Google cloud or Azure.
+Let me start by saying that I am in no way affiliated to AWS and neither do I endorse them. I am however an old and lazy developer who are just used to using the same tools that I started with. So here I am. I'm sure it works pretty much the same on Netlify, Google cloud or Azure.
 
 Create/login to your AWS account and go to top left Services > S3 > Create bucket (top right).
 
@@ -167,9 +167,10 @@ Key in your `Bucket name` and make sure you remember this!
 
 As well as your `Region`, this should be the same as the `AWS_REGION` setting in the `main.yml` file.
 
-`Bucket settings for Block Public Access`, you will have to uncheck this `Block off public access`, they will give a scary warning, But as this is meant to be a public website, you will uncheck this.
+`Bucket settings for Block Public Access`, you will have to **uncheck** this `Block off public access`.
+ You will receive a scary warning, yes but as this is meant to be a public website, you will uncheck this.
 
-And please do remember, anything that is deployed is fully public.
+And please do remember, anything that is deployed is in the public domain.
 
 ### Create a new AWS user to upload to your bucket
 AWS is able to have very minute control over permissions and we will skip the details. In short, we need to create an AWS user that your Github actions can use to do a `put objects` request to the bucket.
@@ -186,11 +187,11 @@ Create a user with `Access type` for `Programmatic access`
 |:--:|
 | *Give this user S3 full access* |
 
-Save your `access ID` and `secret key`. This will be the only time you can save it! <a name="arn-keys"></a>
-
+Save your `access ID` and `secret key`. This will be the only time you can save it! <a name="arn-keys"></a> You might also want to save your user ARN on the next page.
+<a name="arn-user"></a>
 | ![S3 User](images/s3%20user.png) |
 |:--:|
-| *Save this user ARN somewhere* | <a name="arn-user"></a>
+| *Save this user ARN somewhere* | 
 
 ### S3 Bucket Policies
 Now we go back to the S3 bucket. Click on Permissions > Bucket Policy > Policy Generator (At the bottom).
@@ -207,7 +208,7 @@ Every S3 bucket is governed by some "rules" on who can do what, and every single
 |:--:|
 | *Policy Generator* |
 
-The `Principal` refers to the user who will be given permissions to. And the Amazon Resource Name (ARN) will refer to your bucket.
+The `Principal` refers to the user who will be given permissions to. And the `Amazon Resource Name (ARN)` will refer to your bucket.
 
 #### Give `PutObject` and `DeleteObject` permissions
 Key the following settings
