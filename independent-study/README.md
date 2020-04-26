@@ -1,32 +1,50 @@
-#Continuous Deployment of any static site to AWS S3 bucket in less than 30minutes!
+#Continuous Deployment of any static site to AWS S3 bucket in less than 30 minutes!
 
 # Table of contents
 1. [Introduction](#introduction)
-2. [Some paragraph](#paragraph1)
-    1. [Sub paragraph](#subparagraph1)
+2. [What is this about?](#paragraph1)
+    1. [Why?](#subparagraph1)
 3. [Another paragraph](#paragraph2)
 
-## This is the introduction <a name="introduction"></a>
+## Why do I want to do this?<a name="introduction"></a>
 Static sites are all the rage in the galaxy at the moment. 
 
 The internet started with them, if you still can remember.
 | ![Million Dollar Page](images/million-dollar-page.png) | 
 |:--:| 
 | *Million dollar page screenshot (Disclaimer: I am not affiliated with them in any way)* |
-
  
 Then we got adventurous running bigger and bigger backend servers with whatever programming language we can lay our hands on. 
-The trouble we soon realised is that there are simply too many humans in this world, and 
-![TEst image](images/getting%20started.png)
+The trouble we soon realised is that there are simply too many humans in this world, and the moment something goes viral, **everyone** wants to have a piece of it.
+| ![Burning Servers](images/burning.jpg) | 
+|:--:| 
+| *Burning Servers* |
 
-###Why?
-- Cheap
-- Fast
-- "Serverless environment"
+Me sleeping at 3am: "No Sir, I'm not going to rescue your burning servers right now, not even if you pay me double."
+
+So we came up with more and more complexity in autoscaling, CDN and many crowd control measures. They still work and are very much a large part of our current world, nothing wrong.
+
+And developers started moving towards a `serverless` stack which is quite a misnomer as well. Before discovering a [new type of hell](https://medium.com/xebia-engineering/11-reasons-why-you-are-going-to-fail-with-microservices-29b93876268b).
+
+**This article will share with you how to "keep it simple", commit to github, publish to website, sleep in peace, rinse and repeat**
+
+##What is this about?<a name="paragraph1"></a>
+By the end of this article, you should be able to:
+- Make a `git push`
+- Make `github actions` pick up on any deployments
+- Publish your site on an S3 bucket automatically
+
+###Why?<a name="subparagraph1"></a>
+- It's simple.
+- It's cheap, infinitely, actually free for low traffic sites.
+- It scales, infinitely.
+- You can run tests before you deploy (please stay tuned for the next article!).
 
 ###Why Not?
-- Appears rather daunting
-- The configurations might kill me
+- It appears rather daunting. (If you stop reading here and not continue.)
+- The configurations might kill me. (Perhaps it might without a guiding hand here.)
+- Without some human eyeballs, you might actually deploy something you do not want to deploy out in the public domain. Like secrets, passwords, keys and who your girlfriend is. (You could start by adding [the following]() to your `.gitignore`)
+- 
 
 ## Seems like there are many ways to skin the cat <a name="paragraph1"></a>
 ###AWS cloudformation --> AWS lambda --> S3  <a name="subparagraph1"></a>

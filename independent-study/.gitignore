@@ -1,0 +1,6 @@
+### Secrets ###
+*.key
+.env
+db.sqlite3
+credentials.json
+token.pickle
