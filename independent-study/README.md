@@ -1,11 +1,11 @@
 #Continuous Deployment of any static site to AWS S3 bucket in less than 30 minutes!
 
 # Table of contents
-  - [Why do I want to do this?](#why-do-i-want-to-do-thisa-nameintroductiona)
-  - [What is this about?](#what-is-this-abouta-namewhat-is-this-abouta)
-    - [Why?](#whya-namewhya)
-    - [Why Not?](#why-nota-namewhy-nota)
-  - [The steps involved](#lets-dive-ina-namedive-ina)
+  - [Why do I want to do this?](#why-do-i-want-to-do-this)
+  - [What is this about?](#what-is-this-about)
+    - [Why?](#why)
+    - [Why Not?](#why-not)
+  - [The steps involved](#lets-dive-in)
     - [Start local Github repo, or use an existing one.](#start-local-github-repo-or-use-an-existing-one)
     - [Connect your repo to Github](#connect-your-repo-to-github)
     - [Explore Github Actions](#explore-github-actions)
@@ -21,7 +21,7 @@
     - [BONUS: What good is a long ugly endpoint?](#bonus-what-good-is-a-long-ugly-endpoint)
   - [Summary](#summary)
 
-## Why do I want to do this?<a name="introduction"></a>
+## Why do I want to do this?
 Static sites are all the rage in the galaxy at the moment.
 
 The internet started with them, if you still can remember.
@@ -43,25 +43,25 @@ And developers started moving towards a `serverless` stack which is quite a misn
 
 **This article will share with you how to "keep it simple", commit to github, publish to website, sleep in peace, rinse and repeat**
 
-##What is this about?<a name="what-is-this-about"></a>
+##What is this about?
 By the end of this article, you should be able to:
 - Make a `git push`
 - Make `github actions` pick up on any deployments
 - Publish your site on an S3 bucket automatically
 
-###Why?<a name="why"></a>
+###Why?
 - It's simple.
 - It's cheap, infinitely, actually free for low traffic sites.
 - It scales, infinitely.
 - You can run tests before you deploy (please stay tuned for the next article!).
 
-###Why Not?<a name="why-not"></a>
+###Why Not?
 - It appears rather daunting. (If you stop reading here and not continue.)
 - The configurations might kill me. (Perhaps it might without a guiding hand here.)
 - Without some human eyeballs, you might actually deploy something you do not want to deploy out in the public domain. Like secrets, passwords, keys and who your girlfriend is. (You could start by adding [the following](https://github.com/punggolzenith/e28/blob/master/independent-study/.gitignore) to your `.gitignore`)
 - It's really static. :stuck_out_tongue_winking_eye: (Unless you start adding microservices, lambda functions, databases to it, and again, stay tuned for the next article)
 
-##Let's Dive in!<a name="dive-in"></a>
+##Let's Dive in!
 
 Here are the overview of the steps involved.
 
