@@ -91,7 +91,7 @@ Stage the changes with`git add thefilethatyouwanttoadd`.
 
 Then commit changes with `git commit -m "the message that you want to add for commit"`.
 
-How this Git repository lives on your PC and will start tracking all the changes. What if I get some errors? [Start by reading this](https://itnext.io/become-a-git-pro-in-just-one-blog-a-thorough-guide-to-git-architecture-and-command-line-interface-93fbe9bdb395).
+Now this Git repository lives on your PC and will start tracking all the changes. What if I get some errors? [Start by reading this](https://itnext.io/become-a-git-pro-in-just-one-blog-a-thorough-guide-to-git-architecture-and-command-line-interface-93fbe9bdb395).
 
 ### Connect your repo to Github
 Go to Github.com, login/create account, and click the [new repository button](https://github.com/new) on the top left green button. Then follow the instructions there like:
@@ -133,18 +133,18 @@ But actually there is no magic, what [github actions](https://github.com/feature
 
 It will actually run the ubuntu server, then pull code from [@jakejarvis](https://github.com/jakejarvis/s3-sync-action/blob/master/Dockerfile) who has so nicely created a script to install the `aws-cli` and provide the configurations. So that all we have to do is just put in our environmental variables.
 
-In the next article, we will cover how we can actually get github to build our repo, run automated tests for our repo, and if tests are not failing, then deploy. For now, let's keep it simple
+In the next article, we will cover how we can actually get github to build our repo, run automated tests for our repo, and if tests are not failing, then deploy. For now, let's keep it simple.
 
 ### Let's actually make a Github Actions
 | ![Github Actions](images/gh%20actions.png) |
 |:--:|
 | *Let's make a github actions* |
 
-Go ahead and click that.
+Go ahead and click that Actions > Setup a Workflow Yourself.
 
 Paste the above `main.yml` code inside and remember to change your `AWS_REGION` to the one closest to your users.
 
-Configure the `SOURCE_DIR`: You can delete this if you want to deploy your entire github folder. Or if you are using a build system, you might want it to point to your `dist` or `public` folder.
+Configure the `SOURCE_DIR`: You can delete (or comment out with a #) this if you want to deploy your entire github folder. Or if you are using a build system, you might want it to point to your `dist` or `public` folder.
 
 | ![Commit the Action](images/commit%20gh%20action.png) |
 |:--:|
