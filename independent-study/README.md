@@ -96,6 +96,8 @@ But actually there is no magic, what [github actions](https://github.com/feature
 
 It will actually run the ubuntu server, then pull code from [@jakejarvis](https://github.com/jakejarvis/s3-sync-action/blob/master/Dockerfile) who has so nicely created a script to install the `aws-cli` and provide the configurations. So that all we have to do is just put in our environmental variables.
 
+In the next article, we will cover how we can actually get github to build our repo, run automated tests for our repo, and if tests are not failing, then deploy. For now, let's keep it simple
+
 ###Let's actually make a Github Actions
 | ![Github Actions](images/gh%20actions.png) | 
 |:--:| 
@@ -202,7 +204,7 @@ Now we need to turn on `static site hosting` from AWS S3. Meaning that AWS will 
 |:--:| 
 | *Configurations* |
 
-Copy down your `Endpoint`, you might need that for your domain name configurations.
+Copy down your `Endpoint`, you might need that for your domain name configurations and this is where your site will be hosted. <a name="endpoint"></a>
 
 The `index document` is your entry point into your website. In our example, we will use `index.html` and save. (Which obviously doesn't exist yet, but soon will) 
 
@@ -220,44 +222,101 @@ Go ahead and add the following secrets:
 - `AWS_ACCESS_KEY_ID` : [Your access key ID](#arn-keys)
 - `AWS_SECRET_ACCESS_KEY` : [Your access key secret](#arn-keys)
 
-## Seems like there are many ways to skin the cat <a name="paragraph1"></a>
-###AWS cloudformation --> AWS lambda --> S3  <a name="subparagraph1"></a>
-https://developer.okta.com/blog/2018/07/31/use-aws-cloudformation-to-automate-static-site-deployment-with-s3
+###OK we have everything wired up!
+:joy: Finally, time to rock and roll. 
 
-###Github --> Github Webhooks --> AWS CodePipeline --> S3
-https://medium.com/@sithum/automate-static-website-deployment-from-github-to-s3-using-aws-codepipeline-16acca25ebc1
+Let's go back to our code editor on your local machine and test it out.
 
-###Github --> AWS CodePipeline --> CodeBuild --> S3
-[Automatic static site deployment](https://medium.com/@hzburki.hzb/automate-static-site-deployment-on-s3-with-aws-codebuild-8b2546a360df)
+Let's start by adding a new file `index.html` and throw the following Vue boiler code in:
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome to Vue</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js" integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="app">
+    <img src="https://vuejs.org/images/logo.png" alt="Vue logo">
+    <h1>{{ greeting }}</h1>
+    <ul>
+      <li>
+        To learn more about Vue, visit
+        <a :href="docsURL" target="_blank">
+          {{ humanizeURL(docsURL) }}
+        </a>
+      </li>
+      <li>
+        For live help with simple questions, check out
+        <a :href="discordURL" target="_blank">
+          the Discord chat
+        </a>
+      </li>
+      <li>
+        For more complex questions, post to
+        <a :href="forumURL" target="_blank">
+          the forum
+        </a>
+      </li>
+    </ul>
+  </div>
 
-https://medium.com/faun/deploy-static-website-to-amazon-s3-from-github-repository-3f1245d2a780
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        greeting: 'Welcome to your Vue.js app automatically deployed onto S3!',
+        docsURL: 'http://vuejs.org/guide/',
+        discordURL: 'https://chat.vuejs.org',
+        forumURL: 'http://forum.vuejs.org/'
+      },
+      methods: {
+        humanizeURL: function (url) {
+          return url
+            .replace(/^https?:\/\//, '')
+            .replace(/\/$/, '')
+        }
+      }
+    })
+  </script>
+</body>
+</html>
+```
 
-**Codebuild might actually be key to the deployment because the Vue needs to be built, but are there alternatives?**
+Let's go back to check it out on the S3 directory.
 
-###Gitlab --> S3 **What is gitlab??**
-https://www.codementor.io/@mariuszmasztalerczuk/automatic-deployment-of-an-app-from-git-branch-to-s3-p634n6d2u
+| ![It is in S3 now!](images/its%20in%20s3%20now.png) | 
+|:--:| 
+| *It has magically appeared in your S3 bucket* |
 
-###Github Actions
-https://blog.kylegalbraith.com/2019/12/09/deploying-your-static-websites-to-aws-in-style-using-github-actions/
+Test the website
+Visit the [`endpoint`](#endpoint) that you saved from above.
 
-###Use NPM build command + AWS CLI
-https://docs.aws.amazon.com/cli/latest/reference/s3/sync.html
+| ![It worked!](images/worked.png) | 
+|:--:| 
+| *If you are seeing this, it has worked!* |
 
-###Use NPM package
-https://www.npmjs.com/package/deploy-aws-s3-cloudfront 
+You deserve a medal for seeing this :medal_sports:
 
-### Vue-cli add on 
-https://github.com/multiplegeorges/vue-cli-plugin-s3-deploy
+###BONUS: What good is a long ugly endpoint?
+Who is going to visit this www.yourbucket-name-s3-website.aws-region-amazon-super-long-ugly-url-that-I-cant-remember?
 
-### I love bash
-https://www.tothenew.com/blog/automating-deployment-of-a-static-website-hosted-on-amazon-s3/
-https://s3tools.org/s3cmd
+So, let's wire it up with a real domain. Firstly you have to buy or get a domain. (How? That would be beyond this article.)
 
-### I love third party tools
-Travis CI
-https://app.wercker.com/sessions/new?return_url=%2F
-https://codeship.com/
-https://app.shippable.com/
+Go to [cloudflare](https://www.cloudflare.com/) to login/register an account. Delegate the `Domain Name Server` or `DNS` function to `cloudflare`. You might have to go to your own domain company cpanel to do that. 
 
-## Another paragraph <a name="paragraph2"></a>
-The second paragraph text
+| ![DNS](images/dns.png) | 
+|:--:| 
+| *Cloudflare > Your Site > DNS* |
+
+Add a `CNAME` record, and put the `endpoint` as the target. For the `name`, if you want it to point to the root like `your-domain.com`, then key `@`. If you want it to point to a subdomain like `test.your-domain.com`, then type `test`.
+
+Wait for a while, it can take a few days for DNS changes to propage.
+
+Then you will finally see your website showup at your own domain. 
+
+Bonus-bonus: You get a free SSL (You will see a lock on the top left corner of your website) from cloudflare.
+
+##Summary
+In this article, we have learnt how to create a github repo, attach a github action hook to deploy our static site to S3 automatically. We also have learnt some basics of S3 bucket configurations.
+Thank you for reading this and hope you enjoyed it as much as I had in making this.
