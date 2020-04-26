@@ -1,4 +1,4 @@
-# Continuous Deployment of any static site to AWS S3 bucket in less than 30 minutes!
+# Continuous Deployment of any static site from Github to AWS S3 bucket in less than 30 minutes!
 
 # Table of contents
   - [Why do I want to do this?](#why-do-i-want-to-do-this)
