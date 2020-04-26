@@ -1,24 +1,38 @@
 #Continuous Deployment of any static site to AWS S3 bucket in less than 30 minutes!
 
 # Table of contents
-1. [Introduction](#introduction)
-2. [What is this about?](#what-is-this-about)
-    1. [Why?](#why)
-    2. [Why Not?](#why-not)
-3. [Let's Dive In!](#dive-in)
+  - [Why do I want to do this?](#why-do-i-want-to-do-thisa-nameintroductiona)
+  - [What is this about?](#what-is-this-abouta-namewhat-is-this-abouta)
+    - [Why?](#whya-namewhya)
+    - [Why Not?](#why-nota-namewhy-nota)
+  - [The steps involved](#lets-dive-ina-namedive-ina)
+    - [Start local Github repo, or use an existing one.](#start-local-github-repo-or-use-an-existing-one)
+    - [Connect your repo to Github](#connect-your-repo-to-github)
+    - [Explore Github Actions](#explore-github-actions)
+    - [Let's actually make a Github Actions](#lets-actually-make-a-github-actions)
+    - [AWS S3](#aws-s3)
+    - [Create a new AWS user to upload to your bucket](#create-a-new-aws-user-to-upload-to-your-bucket)
+    - [S3 Bucket Policies](#s3-bucket-policies)
+      - [Give `PutObject` and `DeleteObject` permissions](#give-putobject-and-deleteobject-permissions)
+      - [Give `GetObject` permissions to public](#give-getobject-permissions-to-public)
+    - [S3 Static Site Hosting](#s3-static-site-hosting)
+    - [Github Secrets](#github-secrets)
+    - [OK we have everything wired up!](#ok-we-have-everything-wired-up)
+    - [BONUS: What good is a long ugly endpoint?](#bonus-what-good-is-a-long-ugly-endpoint)
+  - [Summary](#summary)
 
 ## Why do I want to do this?<a name="introduction"></a>
-Static sites are all the rage in the galaxy at the moment. 
+Static sites are all the rage in the galaxy at the moment.
 
 The internet started with them, if you still can remember.
-| ![Million Dollar Page](images/million-dollar-page.png) | 
-|:--:| 
+| ![Million Dollar Page](images/million-dollar-page.png) |
+|:--:|
 | *Million dollar page screenshot (Disclaimer: I am not affiliated with them in any way)* |
- 
-Then we got adventurous running bigger and bigger backend servers with whatever programming language we can lay our hands on. 
+
+Then we got adventurous running bigger and bigger backend servers with whatever programming language we can lay our hands on.
 The trouble we soon realised is that there are simply too many humans in this world, and the moment something goes viral, **everyone** wants to have a piece of it.
-| ![Burning Servers](images/burning.jpg) | 
-|:--:| 
+| ![Burning Servers](images/burning.jpg) |
+|:--:|
 | *Burning Servers* |
 
 Me sleeping at 3am: "No Sir, I'm not going to rescue your burning servers right now, not even if you pay me double."
@@ -99,8 +113,8 @@ It will actually run the ubuntu server, then pull code from [@jakejarvis](https:
 In the next article, we will cover how we can actually get github to build our repo, run automated tests for our repo, and if tests are not failing, then deploy. For now, let's keep it simple
 
 ###Let's actually make a Github Actions
-| ![Github Actions](images/gh%20actions.png) | 
-|:--:| 
+| ![Github Actions](images/gh%20actions.png) |
+|:--:|
 | *Let's make a github actions* |
 
 Go ahead and click that.
@@ -109,8 +123,8 @@ Paste the above `main.yml` code inside and remember to change your `AWS_REGION` 
 
 Configure the `SOURCE_DIR`: You can delete this if you want to deploy your entire github folder. Or if you are using a build system, you might want it to point to your `dist` or `public` folder.
 
-| ![Commit the Action](images/commit%20gh%20action.png) | 
-|:--:| 
+| ![Commit the Action](images/commit%20gh%20action.png) |
+|:--:|
 | *Commit the action whenever you are ready* |
 
 Remember to run a `git pull` on your `local` machine to pull these new changes. You will notice that there is a new `.github/workflows/main.yml` created.
@@ -122,15 +136,15 @@ Let me start by saying that I am in no away affiliated to AWS and neither do I e
 
 Create/login to your AWS account and go to top left Services > S3 > Create bucket (top right).
 
-| ![New S3 bucket](images/new%20s3%20bucket.png) | 
-|:--:| 
+| ![New S3 bucket](images/new%20s3%20bucket.png) |
+|:--:|
 | *Create a new S3 bucket* |
 
 Key in your `Bucket name` and make sure you remember this!
 
 As well as your `Region`, this should be the same as the `AWS_REGION` setting in the `main.yml` file.
 
-`Bucket settings for Block Public Access`, you will have to uncheck this `Block off public access`, they will give a scary warning, But as this is meant to be a public website, you will uncheck this. 
+`Bucket settings for Block Public Access`, you will have to uncheck this `Block off public access`, they will give a scary warning, But as this is meant to be a public website, you will uncheck this.
 
 And please do remember, anything that is deployed is fully public.
 
@@ -139,20 +153,20 @@ AWS is able to have very minute control over permissions and we will skip the de
 
 Now we go to top left Services > IAM > Users > New User
 
-| ![IAM](images/iam.png) | 
-|:--:| 
-| *Click on users then new user* | 
+| ![IAM](images/iam.png) |
+|:--:|
+| *Click on users then new user* |
 
 Create a user with `Access type` for `Programmatic access`
 
-| ![S3 Full Access](images/s3%20full%20access.png) | 
-|:--:| 
+| ![S3 Full Access](images/s3%20full%20access.png) |
+|:--:|
 | *Give this user S3 full access* |
 
 Save your `access ID` and `secret key`. This will be the only time you can save it! <a name="arn-keys"></a>
 
-| ![S3 User](images/s3%20user.png) | 
-|:--:| 
+| ![S3 User](images/s3%20user.png) |
+|:--:|
 | *Save this user ARN somewhere* | <a name="arn-user"></a>
 
 ###S3 Bucket Policies
@@ -160,21 +174,21 @@ Now we go back to the S3 bucket. Click on Permissions > Bucket Policy > Policy G
 
 Also copy this `arn:aws:s3:::yourbucketname` after the `Bucket Policy Editor ARN:`. This string refers to your bucket. <a name="arn-bucket"></a>
 
-| ![S3 Bucket Policy](images/bucket%20policy.png) | 
-|:--:| 
+| ![S3 Bucket Policy](images/bucket%20policy.png) |
+|:--:|
 | *Bucket Policy* |
 
 Every S3 bucket is governed by some "rules" on who can do what, and every single permission needs to be spelled out explicitly.
 
-| ![Policy Generator](images/policy%20generator.png) | 
-|:--:| 
+| ![Policy Generator](images/policy%20generator.png) |
+|:--:|
 | *Policy Generator* |
 
 The `Principal` refers to the user who will be given permissions to. And the Amazon Resource Name (ARN) will refer to your bucket.
 
 ####Give `PutObject` and `DeleteObject` permissions
 Key the following settings
-- The [user ARN](#arn-user) that you saved above as the `Principal`. 
+- The [user ARN](#arn-user) that you saved above as the `Principal`.
 - AWS service as Amazon S3
 - Actions: Choose `PutObject` and `DeleteObject`
 - Amazon Resource Name (ARN):  The [bucket ARN](#arn-bucket) that you saved above including a `/*` to denote all objects in the bucket. For example: `arn:aws:s3:::yourbucketname/*`
@@ -184,7 +198,7 @@ Key the following settings
 This website needs to be accessible by the public right?
 
 Key the following settings
-- The `Principal` will be `*` to denote anyone 
+- The `Principal` will be `*` to denote anyone
 - AWS service as Amazon S3
 - Actions: Choose `GetObject`
 - Amazon Resource Name (ARN): Same as above.
@@ -196,25 +210,25 @@ Once you have added these 2 statements, you can `Generate Policy`, then cut and 
 ###S3 Static Site Hosting
 Now we need to turn on `static site hosting` from AWS S3. Meaning that AWS will now serve the entire bucket as if it is a website, how cool is that, our days of server configurations are over.
 
-| ![Static Site](images/static%20site.png) | 
-|:--:| 
+| ![Static Site](images/static%20site.png) |
+|:--:|
 | *Properties > Static website hosting* |
 
-| ![Static Site Configurations](images/static%20site1.png) | 
-|:--:| 
+| ![Static Site Configurations](images/static%20site1.png) |
+|:--:|
 | *Configurations* |
 
 Copy down your `Endpoint`, you might need that for your domain name configurations and this is where your site will be hosted. <a name="endpoint"></a>
 
-The `index document` is your entry point into your website. In our example, we will use `index.html` and save. (Which obviously doesn't exist yet, but soon will) 
+The `index document` is your entry point into your website. In our example, we will use `index.html` and save. (Which obviously doesn't exist yet, but soon will)
 
 ###Github Secrets
 :sweat: Phew that was quite a lot of configurations. Ok, now we are done with all the S3 configurations. Now back to github, since we are not going to commit our `secrets` and dirty underwear for the whole world to see, we are going to trust github with keeping these secrets for us.
 
 Go back to your repo.
 
-| ![Github Secrets](images/secrets%20added.png) | 
-|:--:| 
+| ![Github Secrets](images/secrets%20added.png) |
+|:--:|
 | *Repo > Settings > Secrets > Add a new secret* |
 
 Go ahead and add the following secrets:
@@ -223,7 +237,7 @@ Go ahead and add the following secrets:
 - `AWS_SECRET_ACCESS_KEY` : [Your access key secret](#arn-keys)
 
 ###OK we have everything wired up!
-:joy: Finally, time to rock and roll. 
+:joy: Finally, time to rock and roll.
 
 Let's go back to our code editor on your local machine and test it out.
 
@@ -285,15 +299,15 @@ Let's start by adding a new file `index.html` and throw the following Vue boiler
 
 Let's go back to check it out on the S3 directory.
 
-| ![It is in S3 now!](images/its%20in%20s3%20now.png) | 
-|:--:| 
+| ![It is in S3 now!](images/its%20in%20s3%20now.png) |
+|:--:|
 | *It has magically appeared in your S3 bucket* |
 
 Test the website
 Visit the [`endpoint`](#endpoint) that you saved from above.
 
-| ![It worked!](images/worked.png) | 
-|:--:| 
+| ![It worked!](images/worked.png) |
+|:--:|
 | *If you are seeing this, it has worked!* |
 
 You deserve a medal for seeing this :medal_sports:
@@ -303,17 +317,17 @@ Who is going to visit this www.yourbucket-name-s3-website.aws-region-amazon-supe
 
 So, let's wire it up with a real domain. Firstly you have to buy or get a domain. (How? That would be beyond this article.)
 
-Go to [cloudflare](https://www.cloudflare.com/) to login/register an account. Delegate the `Domain Name Server` or `DNS` function to `cloudflare`. You might have to go to your own domain company cpanel to do that. 
+Go to [cloudflare](https://www.cloudflare.com/) to login/register an account. Delegate the `Domain Name Server` or `DNS` function to `cloudflare`. You might have to go to your own domain company cpanel to do that.
 
-| ![DNS](images/dns.png) | 
-|:--:| 
+| ![DNS](images/dns.png) |
+|:--:|
 | *Cloudflare > Your Site > DNS* |
 
 Add a `CNAME` record, and put the `endpoint` as the target. For the `name`, if you want it to point to the root like `your-domain.com`, then key `@`. If you want it to point to a subdomain like `test.your-domain.com`, then type `test`.
 
 Wait for a while, it can take a few days for DNS changes to propage.
 
-Then you will finally see your website showup at your own domain. 
+Then you will finally see your website showup at your own domain.
 
 Bonus-bonus: You get a free SSL (You will see a lock on the top left corner of your website) from cloudflare.
 
