@@ -321,7 +321,13 @@ Let's start by adding a new file `index.html` and throw the following Vue boiler
 </html>
 ```
 
-Let's go back to check it out on the S3 directory.
+After saving your file, add the file to github by `git add index.html`.
+
+Then commit `git commit -m "Added index.html"`.
+
+Then `git push origin master` to send it to github.
+
+Now that should get the magic started. Let's go back to check it out on the S3 directory.
 
 | ![It is in S3 now!](images/its%20in%20s3%20now.png) |
 |:--:|
