@@ -65,21 +65,20 @@ You should be able to go from zero to hero from this article.
 
 ## Let's Dive in!
 
-Here is an overview of the steps involved.
-
-    - [Start local Github repo, or use an existing one.](#start-local-github-repo-or-use-an-existing-one)
-    - [Connect your repo to Github](#connect-your-repo-to-github)
-    - [Explore Github Actions](#explore-github-actions)
-    - [Let's actually make a Github Actions](#lets-actually-make-a-github-actions)
-    - [AWS S3](#aws-s3)
-    - [Create a new AWS user to upload to your bucket](#create-a-new-aws-user-to-upload-to-your-bucket)
-    - [S3 Bucket Policies](#s3-bucket-policies)
-      - [Give `PutObject` and `DeleteObject` permissions](#give-putobject-and-deleteobject-permissions)
-      - [Give `GetObject` permissions to public](#give-getobject-permissions-to-public)
-    - [S3 Static Site Hosting](#s3-static-site-hosting)
-    - [Github Secrets](#github-secrets)
-    - [OK we have everything wired up!](#ok-we-have-everything-wired-up)
-    - [BONUS: What good is a long ugly endpoint?](#bonus-what-good-is-a-long-ugly-endpoint)
+Here is an overview of the steps involved:
+1. [Start local Github repo, or use an existing one.](#start-local-github-repo-or-use-an-existing-one)
+1. [Connect your repo to Github](#connect-your-repo-to-github)
+1. [Explore Github Actions](#explore-github-actions)
+1. [Let's actually make a Github Actions](#lets-actually-make-a-github-actions)
+1. [AWS S3](#aws-s3)
+1. [Create a new AWS user to upload to your bucket](#create-a-new-aws-user-to-upload-to-your-bucket)
+1. [S3 Bucket Policies](#s3-bucket-policies)
+  1. [Give `PutObject` and `DeleteObject` permissions](#give-putobject-and-deleteobject-permissions)
+  1. [Give `GetObject` permissions to public](#give-getobject-permissions-to-public)
+1. [S3 Static Site Hosting](#s3-static-site-hosting)
+1. [Github Secrets](#github-secrets)
+1. [OK we have everything wired up!](#ok-we-have-everything-wired-up)
+1. [BONUS: What good is a long ugly endpoint?](#bonus-what-good-is-a-long-ugly-endpoint)
 
 ### Start local Github repo, or use an existing one.
 Go to the directory you want to start your repo or an existing repo. `git init`. Write some code. Stage the changes with`git add thefilethatyouwanttoadd`. Then commit changes with `git commit -m "the message that you want to add for commit"`.
