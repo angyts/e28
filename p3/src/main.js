@@ -4,6 +4,7 @@ import App from './App.vue'
 import {BootstrapVue} from 'bootstrap-vue'
 import VueRouter from 'vue-router'
 import store from '@/common/store'
+import Vuelidate from 'vuelidate'
 
 import HomeView from '@/components/HomeView'
 import DayView from "@/components/DayView"
@@ -24,6 +25,7 @@ Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 // Vue.use(IconsPlugin)
 Vue.use(VueRouter)
+Vue.use(Vuelidate)
 
 Vue.config.productionTip = false
 

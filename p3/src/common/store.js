@@ -7,11 +7,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        shifts: []
+        shifts: [],
+        staffs: []
     },
     mutations: {
         setShifts(state, payload) {
             state.shifts = payload;
+        },
+        setStaffs(state, payload) {
+            state.staffs = payload;
         }
     },
     actions: {
@@ -19,7 +23,11 @@ export default new Vuex.Store({
             app.api.all('shifts').then(response => {
                 context.commit('setShifts', response);
             });
-            // TODO move ALL API actions here
+        },// TODO move ALL API actions here
+        fetchStaffs(context) {
+            app.api.all('staff').then(response => {
+                context.commit('setStaffs', response);
+            });
         }
     }
 })

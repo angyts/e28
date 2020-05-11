@@ -29,7 +29,6 @@
                         <b-form-input
                                 id="input-1"
                                 v-model="name"
-                                required
                                 placeholder="Enter name"
                         ></b-form-input>
                     </b-form-group>
@@ -39,7 +38,6 @@
                         <b-form-input
                                 id="input-2"
                                 v-model.trim="slug"
-                                required
                                 placeholder="Enter staff nickname or short name"
                         ></b-form-input>
                     </b-form-group>
@@ -63,6 +61,7 @@
 </template>
 
 <script>
+    import {required, minLength} from 'vuelidate/lib/validators'
     import * as app from '@/common/app.js'
     import ShowEmployee from "@/components/ShowEmployee"
 

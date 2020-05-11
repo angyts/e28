@@ -62,7 +62,6 @@
 </template>
 
 <script>
-    import * as app from '@/common/app.js'
     import Datepicker from 'vuejs-datepicker'
 
     let _ = require('lodash');
@@ -76,7 +75,6 @@
         data: function () {
             return {
                 chosenDate: new Date(),
-                staffs: [],
             }
         },
         computed: {
@@ -91,13 +89,14 @@
             },
             shifts: function () {
                 return this.$store.state.shifts;
+            },
+            staffs: function () {
+                return this.$store.state.staffs;
             }
         },
         mounted: function () {
             this.$store.dispatch('fetchShifts');
-            app.api.all('staff').then(response => {
-                this.staffs = response;
-            });
+            this.$store.dispatch('fetchStaffs');
         },
         methods: {
             shiftAdded: function (shiftToAdd) {
