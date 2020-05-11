@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="51c57e9f-0898-4469-80cf-4e433db6feb1" name="Default Changelist" comment="update favicon.ico" />
+    <list default="true" id="51c57e9f-0898-4469-80cf-4e433db6feb1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/EmployeesView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/EmployeesView.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,6 +52,7 @@
       <option name="presentableId" value="Default" />
       <updated>1587538140559</updated>
       <workItem from="1587538146124" duration="6391000" />
+      <workItem from="1589209536969" duration="5435000" />
     </task>
     <task id="LOCAL-00001" summary="finished MVP">
       <created>1587542949348</created>
@@ -70,7 +75,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587544319340</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add dist">
+      <created>1589209623462</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1589209623462</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -80,16 +92,17 @@
     <MESSAGE value="finished MVP" />
     <MESSAGE value="add dist folder" />
     <MESSAGE value="update favicon.ico" />
-    <option name="LAST_COMMIT_MESSAGE" value="update favicon.ico" />
+    <MESSAGE value="add dist" />
+    <option name="LAST_COMMIT_MESSAGE" value="add dist" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="425" y="44" key="CommitChangelistDialog2" timestamp="1589209581711">
+    <state x="425" y="44" key="CommitChangelistDialog2" timestamp="1589209617806">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state x="425" y="44" key="CommitChangelistDialog2/0.0.1600.900@0.0.1600.900" timestamp="1589209581711" />
-    <state x="392" y="182" key="Vcs.Push.Dialog.v2" timestamp="1587544361146">
+    <state x="425" y="44" key="CommitChangelistDialog2/0.0.1600.900@0.0.1600.900" timestamp="1589209617806" />
+    <state x="392" y="182" key="Vcs.Push.Dialog.v2" timestamp="1589209621836">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state x="392" y="182" key="Vcs.Push.Dialog.v2/0.0.1600.900@0.0.1600.900" timestamp="1587544361146" />
+    <state x="392" y="182" key="Vcs.Push.Dialog.v2/0.0.1600.900@0.0.1600.900" timestamp="1589209621836" />
   </component>
 </project>
