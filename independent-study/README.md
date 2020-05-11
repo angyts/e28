@@ -368,3 +368,4 @@ Thank you for reading this and hope you enjoyed it as much as I had in making th
 Github actions documentation.
 
 [Useful table of contents generator](https://luciopaiva.com/markdown-toc/)
+[Using Vue Router](https://stackoverflow.com/questions/43095823/vue-js-router-history-mode-and-aws-s3-routingrules)
