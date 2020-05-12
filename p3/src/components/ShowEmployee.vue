@@ -1,5 +1,5 @@
 <template>
-    <span class='staff'>
+    <span class='staff' data-test="staff-face">
         <img :id='"staff_"+ staff.slug' class='rounded-circle img-fluid' :src='imageSrc'/>
         <b-tooltip :target='"staff_"+ staff.slug' triggers="hover">
             I'm <b>{{ staff.name }}</b> and I'm <b v-if="!staff.manager ">not</b> a manager.
