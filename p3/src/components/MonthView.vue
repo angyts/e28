@@ -12,7 +12,12 @@
 <script>
     export default {
         name: "MonthView",
-        props: ['chosenDate', 'shifts'],
+        props: ['chosenDate'],
+        computed: {
+            shifts: function () {
+                return this.$store.state.shifts;
+            }
+        },
         methods: {
             getEventColor(event) {
                 if (event.staff != undefined) {

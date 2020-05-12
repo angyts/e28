@@ -48,12 +48,8 @@
                     </b-collapse>
                 </b-navbar>
                 <b-card-body>
-                    <router-view v-on:shiftAdded='shiftAdded($event)'
-                                 v-on:shiftDeleted='shiftDeleted($event)'
-                                 v-on:staffAdded='staffAdded($event)'
+                    <router-view v-on:staffAdded='staffAdded($event)'
                                  :chosenDate="chosenDayMonthYear"
-                                 :shifts="shifts"
-                                 :staffs="staffs"
                     ></router-view>
                 </b-card-body>
             </div> <!-- /container -->
@@ -63,8 +59,6 @@
 
 <script>
     import Datepicker from 'vuejs-datepicker'
-
-    let _ = require('lodash');
 
     var moment = require('moment');
     export default {
@@ -99,14 +93,6 @@
             this.$store.dispatch('fetchStaffs');
         },
         methods: {
-            shiftAdded: function (shiftToAdd) {
-                this.shifts.push(shiftToAdd);
-            },
-            shiftDeleted: function (shiftToDelete) {
-                this.shifts = _.remove(this.shifts, function (n) { // TODO need to read up about lodash... wierd it works upside down
-                    return n.id !== shiftToDelete.id;
-                });
-            },
             staffAdded: function (staff) {
                 this.staffs.push(staff);
             }

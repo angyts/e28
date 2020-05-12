@@ -1,7 +1,7 @@
 <template>
-    <div class="container">
+    <div class="container" data-test="dayview">
         <div class="row">
-            <b-button block variant="primary" @click.prevent="addShift">Add Shift</b-button>
+            <b-button block variant="primary" @click.prevent="addShift" data-test="add-shift-button-dropdown">Add Shift</b-button>
         </div>
         <transition name="fade">
             <div class="div bg-light" v-show="addShiftDropdown">
@@ -15,6 +15,7 @@
                                 :bootstrap-styling="true"
                                 :inline="true"
                                 v-model="dateToAdd"
+                                data-test="date-picker"
                                 name="datepicker"></datepicker>
                     </div>
                     <div class="col">
@@ -29,6 +30,7 @@
                                 :max="endTimetoAdd"
                                 header-color="bg-primary"
                                 color="bg-primary"
+                                data-test="time-picker"
                         ></v-time-picker>
                     </div>
                     <div class="col">
@@ -61,12 +63,14 @@
         </transition>
         <div v-if="selectedShift.staff != undefined" class="alert alert-success" role="alert">
             The following stars are rostered:
-            <span v-for="(staff, id) in selectedShift.staff" :key="id"><show-employee
+            <span v-for="(staff, id) in selectedShift.staff" :key="id">
+                <show-employee
                     :staff="staff"
-            ></show-employee></span>
+            ></show-employee>
+            </span>
         </div>
         <div class="row" v-if="deleteShiftView">
-            <b-button block variant="danger" @click.prevent="deleteShiftConfirm">Delete Shift</b-button>
+            <b-button block variant="danger" @click.prevent="deleteShiftConfirm" data-test="deleteshiftbutton">Delete Shift</b-button>
         </div>
         <div class="row">
             <div class="col-10" id="shiftrow">
@@ -81,6 +85,7 @@
                         :type="'day'"
                         :hide-header="true"
                         @click:event="deleteShift"
+                        data-test="day-calander"
                 ></v-calendar>
             </div>
             <div class="col-2" id="peoplerow">
@@ -92,6 +97,7 @@
                               :key="id">
                         <show-employee
                                 :staff="staff"
+                                data-test="employeesindayview"
                         ></show-employee>
                     </b-button>
                 </div>
@@ -116,7 +122,15 @@
             Datepicker,
             ShowEmployee
         },
-        props: ['chosenDate', 'shifts', 'staffs'],
+        props: ['chosenDate'],
+        computed: {
+            shifts: function () {
+                return this.$store.state.shifts;
+            },
+            staffs: function () {
+                return this.$store.state.staffs;
+            }
+        },
         data: function () {
             return {
                 // View Events
@@ -163,10 +177,10 @@
                         endFormatted: endFormatted,
                     };
 
-                    app.api.add('shifts', shiftToAdd).then(response => {
+                    this.$store.dispatch('addShifts', shiftToAdd)
+                   .then(response => {
                         this.message = `Your ${this.shiftName} have been added`;
                         shiftToAdd.id = response;
-                        this.$emit('shiftAdded', shiftToAdd);
                         setTimeout(this.resetMessage, 2000);
                     });
                 }
@@ -182,8 +196,7 @@
                 this.deleteShiftView = false;
                 let shift = this.selectedShift;
                 this.message = `Your ${shift.name} have been deleted`;
-                this.$emit('shiftDeleted', shift);
-                app.api.delete('shifts', shift.id);
+                this.$store.dispatch('deleteShifts', shift);
                 setTimeout(this.resetMessage, 2000);
                 // TODO setTimeout(() => (this.message = ''),3000);
             },

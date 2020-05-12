@@ -12,7 +12,12 @@
 <script>
     export default {
         name: "WeekView",
-        props: ['chosenDate', 'shifts'],
+        props: ['chosenDate'],
+        computed: {
+            shifts: function () {
+                return this.$store.state.shifts;
+            }
+        },
         methods: {
             getEventColor(event) {
                 if (event.staff != undefined) {
