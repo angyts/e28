@@ -2,10 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="51c57e9f-0898-4469-80cf-4e433db6feb1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/_redirects" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ShowEmployee.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ShowEmployee.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/.htaccess" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/css/app.f952b21d.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/css/chunk-vendors.ce90cf17.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/img/cat.42e616a6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/img/cow.70471207.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/img/dog.5aaa9182.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/img/fish.883f67e4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/img/koala.bed435df.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/img/owl.50a9a5b7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/app.c99a16d2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/app.c99a16d2.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/chunk-vendors.064fe00e.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/chunk-vendors.064fe00e.js.map" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +66,7 @@
       <option name="presentableId" value="Default" />
       <updated>1587538140559</updated>
       <workItem from="1587538146124" duration="6391000" />
-      <workItem from="1589209536969" duration="9371000" />
+      <workItem from="1589209536969" duration="9855000" />
     </task>
     <task id="LOCAL-00001" summary="finished MVP">
       <created>1587542949348</created>
@@ -90,7 +103,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589215064113</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="one unit test passing">
+      <created>1589262692239</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1589262692239</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -102,20 +122,25 @@
     <MESSAGE value="update favicon.ico" />
     <MESSAGE value="add dist" />
     <MESSAGE value="Vuelidate added&#10;added local storage on employeesview" />
-    <option name="LAST_COMMIT_MESSAGE" value="Vuelidate added&#10;added local storage on employeesview" />
+    <MESSAGE value="one unit test passing" />
+    <option name="LAST_COMMIT_MESSAGE" value="one unit test passing" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="425" y="44" key="CommitChangelistDialog2" timestamp="1589215056239">
+    <state x="560" y="252" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589262828684">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state x="425" y="44" key="CommitChangelistDialog2/0.0.1600.900@0.0.1600.900" timestamp="1589215056239" />
+    <state x="560" y="252" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1600.900@0.0.1600.900" timestamp="1589262828684" />
+    <state x="425" y="44" key="CommitChangelistDialog2" timestamp="1589262681023">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state x="425" y="44" key="CommitChangelistDialog2/0.0.1600.900@0.0.1600.900" timestamp="1589262681023" />
     <state x="580" y="204" key="FileChooserDialogImpl" timestamp="1589234723841">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
     <state x="580" y="204" key="FileChooserDialogImpl/0.0.1600.900@0.0.1600.900" timestamp="1589234723841" />
-    <state x="392" y="182" key="Vcs.Push.Dialog.v2" timestamp="1589215059168">
+    <state x="392" y="182" key="Vcs.Push.Dialog.v2" timestamp="1589262684251">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state x="392" y="182" key="Vcs.Push.Dialog.v2/0.0.1600.900@0.0.1600.900" timestamp="1589215059168" />
+    <state x="392" y="182" key="Vcs.Push.Dialog.v2/0.0.1600.900@0.0.1600.900" timestamp="1589262684251" />
   </component>
 </project>
