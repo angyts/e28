@@ -25,6 +25,11 @@ export default new Vuex.Store({
         },
         setStaffs(state, payload) {
             state.staffs = payload;
+        },
+        deleteStaffs(state, payload){
+          state.staffs = _.remove(state.staffs, function (n) { // TODO need to read up about lodash... wierd it works upside down
+                    return n.id !== payload.id;
+                    });
         }
     },
     actions: {
@@ -46,7 +51,11 @@ export default new Vuex.Store({
             app.api.all('staff').then(response => {
                 context.commit('setStaffs', response);
             });
-        }
+        },
+         deleteStaffs(context, staff){
+            context.commit('deleteStaffs', staff);
+            app.api.delete('staff', staff.id);
+        },
     },
     getters: {
     getStaffbySlug(state) {

@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" data-test="managerviewforstaff">
         <div class="row">
             <h2>Your Dream Team</h2>
         </div>
@@ -7,12 +7,16 @@
             {{message}}
         </div>
         <div class="row">
-            <show-employee
-                    class="col-lg-4"
-                    v-for="(staff, id) in staffs"
-                    :staff="staff"
-                    :key="id"
-            ></show-employee>
+            <b-button @click="selectEmployee(staff)"
+                      class="col-lg-4"
+                      v-for="(staff, id) in staffs"
+                      :key="id"
+                      variant="outline-primary">
+                 <show-employee :staff="staff" :data-test="staff.slug"></show-employee>
+                </b-button>
+        </div>
+        <div class="row" v-if="showdelete">
+            <b-button block variant="danger" @click.prevent="deleteEmployee" data-test="deleteEmployeebutton">Delete Employee</b-button>
         </div>
         <div class="row">
             <div class="col">
@@ -27,7 +31,7 @@
                             description="Full Name of Staff Please"
                     >
                         <b-form-input
-                                id="input-1"
+                                id="staffname"
                                 v-model="$v.name.$model"
                                 placeholder="Enter name"
                                 :state="$v.name.$dirty ? !$v.name.$error : null"
@@ -42,7 +46,7 @@
                     <b-form-group id="input-group-2" label="Nickname:" label-for="input-2"
                                   description="Single Word only">
                         <b-form-input
-                                id="input-2"
+                                id="staffslug"
                                 v-model="$v.slug.$model"
                                 placeholder="Enter staff nickname or short name"
                                 :state="$v.slug.$dirty ? !$v.slug.$error : null"
@@ -64,13 +68,12 @@
                         </b-form-checkbox-group>
                     </b-form-group>
 
-                    <b-button type="submit" variant="primary">Submit</b-button>
+                    <b-button type="submit" variant="primary" data-test="submitbtn">Submit</b-button>
                     <b-button type="reset" variant="danger">Reset</b-button>
                     <b-alert show variant="danger" v-if="$v.$anyError">Please correct the above errors</b-alert>
                 </b-form>
             </div>
             <div class="col">
-
             </div>
         </div>
     </div>
@@ -91,7 +94,9 @@
                 show: true, // apparently to reset form validation
                 name: "",
                 slug: "",
-                manager: false
+                manager: false,
+                showdelete: false,
+                selectedstaff: {},
             }
         },
         computed: {
@@ -109,16 +114,31 @@
                 alphaNum,
                 doesNotExist(value) {
                     return !this.$store.getters.getStaffbySlug(value);
-            }
+                }
             }
         },
         mounted: function(){
             let form = JSON.parse(localStorage.getItem('form'));
-            this.name = form.name;
-            this.slug = form.slug;
-            this.manager = form.manager;
+            if (form !== null){
+                this.name = form.name;
+                this.slug = form.slug;
+                this.manager = form.manager;
+            }
         },
         methods: {
+            selectEmployee(staff){
+                this.showdelete = true;
+                this.selectedstaff = staff;
+            },
+            deleteEmployee(){
+                 if (this.selectedstaff == {}) {
+                        this.message = "Please select a staff first";
+                    }
+                 else{
+                     this.$store.dispatch('deleteStaffs', this.selectedstaff);
+                     this.message = "Staff successfully deleted";
+                 }
+            },
             onSubmit() {
                 // Invoke this touch method to force the validation system to register errors even if the user hasn't interacted with any of the fields yet.
                 this.$v.$touch();

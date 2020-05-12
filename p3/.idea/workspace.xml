@@ -2,19 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="51c57e9f-0898-4469-80cf-4e433db6feb1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/e2e/specs/roster.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cypress.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/e2e/.eslintrc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/e2e/specs/staff.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/css/app.3716d6ff.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/css/chunk-vendors.3ef0fd57.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/app.34329ff8.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/app.34329ff8.js.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/common/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/store.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/DayView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DayView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/HomeView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HomeView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MonthView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MonthView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/WeekView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/WeekView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/EmployeesView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/EmployeesView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -58,7 +69,7 @@
       <updated>1587538140559</updated>
       <workItem from="1587538146124" duration="6391000" />
       <workItem from="1589209536969" duration="10530000" />
-      <workItem from="1589283409000" duration="8181000" />
+      <workItem from="1589283409000" duration="12400000" />
     </task>
     <task id="LOCAL-00001" summary="finished MVP">
       <created>1587542949348</created>
@@ -116,7 +127,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589285112374</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="code refactored to move most functions to vueX&#10;cypress passing for roster function">
+      <created>1589299998961</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1589299998961</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -131,25 +149,26 @@
     <MESSAGE value="one unit test passing" />
     <MESSAGE value="first deploy to netlify" />
     <MESSAGE value="installed cypress" />
-    <option name="LAST_COMMIT_MESSAGE" value="installed cypress" />
+    <MESSAGE value="code refactored to move most functions to vueX&#10;cypress passing for roster function" />
+    <option name="LAST_COMMIT_MESSAGE" value="code refactored to move most functions to vueX&#10;cypress passing for roster function" />
   </component>
   <component name="WindowStateProjectService">
     <state x="560" y="252" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589262828684">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
     <state x="560" y="252" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1600.900@0.0.1600.900" timestamp="1589262828684" />
-    <state x="425" y="44" key="CommitChangelistDialog2" timestamp="1589285097240">
+    <state x="425" y="44" key="CommitChangelistDialog2" timestamp="1589299991290">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state x="425" y="44" key="CommitChangelistDialog2/0.0.1600.900@0.0.1600.900" timestamp="1589285097240" />
+    <state x="425" y="44" key="CommitChangelistDialog2/0.0.1600.900@0.0.1600.900" timestamp="1589299991290" />
     <state x="580" y="204" key="FileChooserDialogImpl" timestamp="1589234723841">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
     <state x="580" y="204" key="FileChooserDialogImpl/0.0.1600.900@0.0.1600.900" timestamp="1589234723841" />
-    <state x="392" y="182" key="Vcs.Push.Dialog.v2" timestamp="1589285100037">
+    <state x="392" y="182" key="Vcs.Push.Dialog.v2" timestamp="1589299995124">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state x="392" y="182" key="Vcs.Push.Dialog.v2/0.0.1600.900@0.0.1600.900" timestamp="1589285100037" />
+    <state x="392" y="182" key="Vcs.Push.Dialog.v2/0.0.1600.900@0.0.1600.900" timestamp="1589299995124" />
     <state x="496" y="273" key="com.intellij.ide.util.TipDialog" timestamp="1589283414123">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
